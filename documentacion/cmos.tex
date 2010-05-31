@@ -43,8 +43,8 @@
 \begin{document}
 \title{CMOS Setup}
 \author{Ana Benitez (\texttt{ana\_benitez\_py@hotmail.com}), \\
-		Maria Monserrat Silva(\texttt{monse\_14\_fob@hotmail.es}), \\
-		Fabiola Ruiz Leiva(\texttt{fabiola.ruiz.leiva@gmail.com}), \\ 
+		Maria Monserrat Silva (\texttt{monse\_14\_fob@hotmail.es}), \\
+		Fabiola Ruiz Leiva (\texttt{fabiola.ruiz.leiva@gmail.com}), \\ 
 		Kenny Meyer (\texttt{knny.myer@gmail.com})}
 \date{Mayo 2010}
 \maketitle
@@ -54,7 +54,7 @@
 %  * La documentacion sera leida por los companeros
 %  * Tiene que ser comprensiva y completa.
 %
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{3}
 \tableofcontents
 
 \newpage
@@ -74,7 +74,7 @@ Lo que es más:
 	\item ¿O algo tan sencillo pero importante como la fecha y la hora? 
 \end{itemize}
 
-Por ende, la unidad y programa que se encarga de todo esto es la CMOS Setup o BIOS.
+Por ende, la unidad y programa que se encarga de todo esto es la BIOS.
 Resulta evidente que la BIOS debe poderse modificar para alterar estos datos
 (al añadir un disco duro o cambiar al horario de verano, por ejemplo); por ello
 las BIOS se implementan en memoria. \\
@@ -113,30 +113,54 @@ denomina {\bf CMOS Setup}.
 		\subsection{El CMOS}{\label{sec:conceptos/CMOS}}
 
 		{\bf CMOS} es la contracción de {\em Complementary Metal Oxide Semiconductor}, o
-		Tecnología Metal Óxido Semiconductor Complementario.
-		
+		Tecnología Metal Óxido Semiconductor Complementario. \\
 		Es una tecnología utilizada para fabricar circuitos integrados (chips), que
 		para el caso es un memoria del tipo ROM, en la actualidad FLASH ROM (se
 		borran electricamente) donde se guarda información básica del equipo como el
-		BIOS y el SETUP. 
-		
-		Esta memoria tiene una porción que funciona como RAM, donde se guarda la
+		BIOS y el SETUP. \\ 
+		{\bf Esta memoria tiene una porción que funciona como RAM, donde se guarda la
 		configuración que el usuario le da al equipo y algunas configuraciones
-		establecidas de fábrica. \\ 
-		Otra información que se guarda en el {\bf CMOS} y que se accede mediante el
-		SETUP es la fecha y la hora del sistema, y para que la misma se mantenga
+		establecidas de fábrica.} \\ 
+		Otra información que se guarda en el y que se accede mediante el SETUP
+		es la fecha y la hora del sistema, y para que la misma se mantenga
 		actualizada debe estar siempre alimentada, es por esto que en toda
 		computadora encontraremos una pila para alimentar dicho circuito.
 
-		\subsection{La BIOS}{\label{sec:conceptos/BIOS}}
+			\subsubsection{El RAM-CMOS}\label{sub:el ram-cmos}
+			RAM-CMOS es un tipo de memoria en que se guardan los datos que se
+			pueden configurar del BIOS y contiene información básica sobre algunos
+			recursos del sistema que son susceptibles de ser modificados como el
+			disco duro, el tipo de disco flexible, etc. \\
+			Esta información es almacenada en una RAM, de 64 bytes de capacidad,
+			con tecnología CMOS, que le proporciona el bajo consumo necesario para
+			ser alimentada por una pila que se encuentra en la placa base y que
+			debe durar años, al ser necesario que este alimentada constantemente,
+			incluso cuando el ordenador se encuentra apagado. Para ello
+			antiguamente se usaba una batería recargable que se cargaba cuando el
+			ordenador se encendía. \\
+			Mas modernamente se ha sustituido por una pila desechable de litio
+			(generalmente modelo CR-2032) y que dura de 2 a 5 años.
+
+		\subsection{El BIOS}{\label{sec:conceptos/BIOS}}
 
 		BIOS es la contracción de Basic Input Output System, o Sistema Básico de
-		Entrada – Salida. 
+		Entrada – Salida. \\
 		Es un programa muy básico, normalmente programado en lenguaje ensamblador,
-		cuya misión es la de arrancar o posibilitar el “Booteo” de la computadora.
+		cuya misión es la de arrancar o posibilitar el ``Booteo'' de la computadora.
 		A pesar de tratarse de un programa sumamente básico resulta totalmente
 		indispensable, ya que sin el BIOS sería imposible que una computadora pudiera
 		iniciar.
+
+		\subsection{CMOS Setup}\label{sub:cmos setup}
+		
+		Basicamente el CMOS Setup es el programa que puede modificar todos los parametros
+		guardada en la CMOS de forma visual y tangible (con el teclado).
+
+		El CMOS Setup es una serie de instrucciones generalmente escrito en
+		lenguaje Ensemblador que se lee de la BIOS al arrancar la computadora.
+
+		Se suelen usar los terminos CMOS Setup y BIOS Setup como sinonimos para indicar lo mismo,
+		pero son dos diferentes circuitos en la placa base.
 
 	\newpage
 
@@ -157,46 +181,40 @@ El concepto del BIOS:
 
 \end{quotation}
 
-Esta seccion tratara todo lo referente al BIOS.
+Cada equipo cuenta con varios BIOS: 
+\begin{itemize}
+	\item El BIOS de la placa madre 
+	\item El BIOS que controla el teclado 
+	\item El BIOS de la tarjeta de vídeo y eventualmente, 
+	\item El BIOS para controladoras SCSI, que se utiliza para iniciar
+		desde un dispositivo SCSI, el que luego se comunica con el DOS, sin
+		que se necesite un controlador adicional. 
+	\item El BIOS de la tarjeta de red para iniciar desde una red) 
+\end{itemize}
 
-	\subsection{El arrancar de la Computadora}{\label{sec:bios/arranque}}
+	\subsection{El arrancar de la computadora}{\label{sec:bios/arranque}}
 
-	Una vez que presionamos el botón power de nuestra computadora, el BIOS
-	guardado en la CMOS se copia en la RAM y es ejecutado por el
-	microprocesador, aunque en las motherboards actuales también puede ser
-	ejecutado directamente desde la CMOS.
+	Cuando se acciona el botón de encendido o se presiona el botón de re-inicio
+	(Reset) la carga eléctrica inicial hace que arranque la unidad central de
+	% Fix accents
+	proceso y pide instrucciones al BIOS (instrucciones permanentes que no se
+	borran al apagar la computadora). \\ 
+	El CPU empieza a ejecutar las instrucciones, en particular la Auto prueba
+	de arranque (Power On Self Test, POST) la cual verifica la integridad de la
+	memoria, controladores, y dispositivos del sistema. \\ 
+	Actualmente el sistema de Conectar y Funcionar (Plug and Play) es muy
+	común, por lo que hay que evaluar la memoria de acceso aleatorio (Random
+	Access Memory, RAM), configurar los adaptadores de Conectar y Funcionar, el 
+	sonido y el vídeo. \\ 
+	Si el BIOS no es de Conectar y Funcionar, el arranque del sistema pasa a la
+	siguiente fase. \\ 
+	El BIOS busca un disco de arranque con las instrucciones para cargar el
+	sistema operativo.  Típicamente el BIOS busca primero en la unidad A: y
+	luego en la unidad C: hasta que halla el disco de arranque y lee el primer
+	sector o bloque de información. Este es el sector de arranque que contiene
+	las instrucciones para cargar el sistema operativo.
 
-	Cuando la computadora arranca el BIOS testea y activa una serie de
-	elementos de hardware del sistema, tales como el teclado, monitor y
-	unidades de almacenamiento, efectúa un proceso de comprobación de los
-	mismos denominado POST, Power On Self Test o programa de autotesteo, carga
-	una serie de configuraciones establecidas, tanto por el usuario como por el
-	propio BIOS, busca el sistema operativo entre los distintos medios de
-	almacenamiento presentes, carga ste en la RAM, lo hace residente y luego le
-	transfiere el control de la computadora al mismo.
-
-	A partir de este punto acaba de trabajar ya que todo el control pasa al sistema
-	operativo.
-
-	\subsection{Que hace el BIOS?}{\label{sec:bios/que-hace-la-bios}}
-	\subsection{Configuracion de la BIOS}{\label{sec:bios/configuracion-de-bios}}
-	La mayoría de los BIOS tienen un programa de configuración que permite modificar la configuración básica del sistema. Este tipo de información se almacena en una memoria auto-alimentada (por medio de una batería), para que la información permanezca almacenada incluso si el ordenador se encuentra apagado (la memoria RAM se reinicia cada vez que se inicia el sistema).
-	Cada equipo cuenta con varios BIOS: 
-	El BIOS de la placa madre 
-	El BIOS que controla el teclado 
-	El BIOS de la tarjeta de video 
-	y eventualmente, 
-	El BIOS para controladoras SCSI, que se utiliza para iniciar desde un dispositivo SCSI, el que luego se comunica con el DOS, sin que se necesite un controlador adicional. 
-	(El BIOS de la tarjeta de red para iniciar desde una red) 
-	Cuando se enciende el ordenador, el BIOS muestra una mensaje de copyright en pantalla, luego realiza los diagnósticos y pruebas pertinentes a la inicialización. Luego de completadas las pruebas, el BIOS muestra un mensaje en el que se invita al usuario a que presione una o más teclas para ingresar a la configuración del BIOS. 
-	Según la marca de BIOS, puede tratarse de la tecla F2, de la tecla F10, o bien de la tecla Supr, o alguna de las siguientes secuencias de teclas: 
-	Ctrl+Alt+S 
-	Ctrl+Alt+Esc 
-	Ctrl+Alt+Ins 
-	En los BIOS Award, se muestran los siguientes mensajes durante el POST:
-	PARA INGRESAR A LA CONFIGURACIÓN ANTES DE REINICIAR PRESIONE CTRL-ALT-ESC O LA TECLA DEL
-
-	\subsection{Solucion de problemas}{\label{sec:bios/solcion-de-problemas}}
+	\subsection{Solución de problemas}{\label{sec:bios/solucion-de-problemas}}
 		\subsubsection{Pitidos de la BIOS (Award)}{\label{sec:bios/tonos-de-la-bios}}
 
 		En esta seccion cubriremos los significados de los pitidos de los BIOS {\em Award}. \\
@@ -369,11 +387,77 @@ Esta seccion tratara todo lo referente al BIOS.
 			colocado como maestro en el controlador IDE primario. Para
 			solucionar comprobaremos las conexiones del disco y la
 			configuración de la BIOS. 
+	
+	\subsection{Actualizar el BIOS}\label{sec:actualizar el bios}
 
 	\newpage
 
 \section{El CMOS Setup}{\label{sec:cmossetup}}
-	\subsection{Resetear el CMOS Setup}{\label{sec:cmossetup/resetear-el-cmos-setup}}
+
+	El CMOS Setup es un conjunto de instrucciones en la BIOS que permite
+	manipular la información en los chips CMOS.
+
+	{\bf Recordar:} El BIOS es de solo lectura; el CMOS chip es de escritura/lectura.
+
+	El CMOS requiere de energía eléctrica constante para no perder la
+	información guardada en los chips CMOS y por eso los fabricantes de las
+	placas madres lo traen con una pila de bajo voltaje y consumo.
+
+	La pila se recarga automáticamente al encender la computadora y puede
+	provenir la capacidad suficiente para aproximadamente 1000 días.
+
+	Según la marca de BIOS, puede tratarse de la tecla F2, de la tecla F10, o
+	bien de la tecla Supr, o alguna de las siguientes secuencias de teclas: 
+
+	\begin{verbatim}
+	Ctrl + Alt + S 
+	Ctrl + Alt + Esc 
+	Ctrl + Alt + Ins 
+	\end{verbatim}
+
+	En los BIOS Award, se muestran los siguientes mensajes durante el POST:
+	PARA INGRESAR A LA CONFIGURACIÓN ANTES DE REINICIAR PRESIONE CTRL-ALT-ESC O LA TECLA DEL
+	\subsection{Opciones en la CMOS Setup}
+	%%% COMPLETAR!
+
+	\subsection{Restaurar la configuración del CMOS Setup}{\label{sec:cmossetup/resetear-el-cmos-setup}}
+
+	Hay varias formas de restaurar la configuración del CMOS Setup o bien del chip CMOS.
+
+	Generalmente no se lo hace, pero en caso de olvidar la contraseña de acceso al CMOS Setup un reseteo sera inevitable.
+
+	\subsubsection{Metodo 1}{\label{sec:metodo 1}}
+
+	Sacar la pila del CMOS que se encuentra sujetada en un slot para la pila en
+	la placa base por unos segundos, despues reemplazarla otravez.
+
+	\subsubsection{Metodo 2}{\label{sec:metodo 2}}
+
+	Algunas placas base ofrecen un jumper CMOS-reset o un botón de reinicio.
+
+
+
+	\subsubsection{Metodo 3}{\label{sec:metodo 3}}
+
+	En otros casos, el chip EEPROM ha de desoldar los datos en forma manual,
+	por manos de un programador. A veces es suficiente motivo para el CLK o
+	línea de DTA de la I2C bus de la EEPROM en el momento adecuado durante el
+	arranque, esto requiere una cierta precisión en las piezas de soldadura
+	SMD. Si la máquina le permite arrancar, pero no quiere que le permiten a la
+	configuración de la BIOS, una posible recuperación es dañar la suma de
+	comprobación CMOS, haciendo puerto directo escribe usando debug.exe,
+	corrompiendo a algunos bytes de la suma de control de área protegida de la
+	RAM CMOS, en el siguiente arranque, el equipo normalmente restablece su
+	configuración de fábrica. Por ejemplo:
+
+	\begin{verbatim}
+	c:\debug
+	-o 70 10
+	-o 71 aa
+	-q
+	\end{verbatim}
+
+	Que permitirá escribir en CMOS (Offset 10h) con el valor 0AAhA.
 
 	\newpage
 
@@ -396,6 +480,9 @@ Esta seccion tratara todo lo referente al BIOS.
 
 	\bibitem{MDB}
 		Mesmer, ``Manual de la BIOS'', Marzo 2001
+	
+	\bibitem{BootProcess}
+		\url{http://duartes.org/gustavo/blog/post/how-computers-boot-up/}
 
 \end{thebibliography}
 \end{document}
