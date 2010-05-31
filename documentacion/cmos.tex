@@ -16,12 +16,17 @@
 %%% Provide underlining:
 %\usepackage{ulem}
 
+%% Provide graphics support:
+
 %% EN: Set language to Spanish
 %% ES: Definir idioma como Castellano
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
 
 \usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{float}
 \usepackage[utf8]{inputenc}
 \usepackage{url} % para URLs en la bibliografía
 
@@ -56,7 +61,6 @@
 %
 \setcounter{tocdepth}{3}
 \tableofcontents
-
 \newpage
 
 \section{Introducción}{\label{sec:introduccion}}
@@ -154,15 +158,13 @@ denomina {\bf CMOS Setup}.
 		\subsection{CMOS Setup}\label{sub:cmos setup}
 		
 		Basicamente el CMOS Setup es el programa que puede modificar todos los parametros
-		guardada en la CMOS de forma visual y tangible (con el teclado).
-
+		guardada en la CMOS de forma visual y tangible (con el teclado). \\
 		El CMOS Setup es una serie de instrucciones generalmente escrito en
-		lenguaje Ensemblador que se lee de la BIOS al arrancar la computadora.
+		lenguaje Ensemblador que se lee de la BIOS al arrancar la computadora. \\
+		Se suelen usar los terminos CMOS Setup y BIOS Setup como sinonimos para
+		indicar lo mismo, pero son dos diferentes circuitos en la placa base. \\
 
-		Se suelen usar los terminos CMOS Setup y BIOS Setup como sinonimos para indicar lo mismo,
-		pero son dos diferentes circuitos en la placa base.
-
-	\newpage
+		\newpage
 
 \section{El BIOS}{\label{sec:bios}}
 
@@ -194,204 +196,212 @@ Cada equipo cuenta con varios BIOS:
 
 	\subsection{El arrancar de la computadora}{\label{sec:bios/arranque}}
 
+	\begin{figure}
+		\centering
+			\includegraphics[scale=0.6]{presentacion/Screenshot-Ingresando_al_BIOS_Setup-1.png}
+		\caption{El BIOS al encender la computadora.}
+	\end{figure}
+
 	Cuando se acciona el botón de encendido o se presiona el botón de re-inicio
 	(Reset) la carga eléctrica inicial hace que arranque la unidad central de
 	% Fix accents
 	proceso y pide instrucciones al BIOS (instrucciones permanentes que no se
-	borran al apagar la computadora). \\ 
+	borran al apagar la computadora). 
+	\\ 
 	El CPU empieza a ejecutar las instrucciones, en particular la Auto prueba
 	de arranque (Power On Self Test, POST) la cual verifica la integridad de la
-	memoria, controladores, y dispositivos del sistema. \\ 
+	memoria, controladores, y dispositivos del sistema. 
+	\\ 
 	Actualmente el sistema de Conectar y Funcionar (Plug and Play) es muy
 	común, por lo que hay que evaluar la memoria de acceso aleatorio (Random
 	Access Memory, RAM), configurar los adaptadores de Conectar y Funcionar, el 
-	sonido y el vídeo. \\ 
+	sonido y el vídeo. 
+	\\ 
 	Si el BIOS no es de Conectar y Funcionar, el arranque del sistema pasa a la
-	siguiente fase. \\ 
+	siguiente fase. 
+	\\ 
 	El BIOS busca un disco de arranque con las instrucciones para cargar el
 	sistema operativo.  Típicamente el BIOS busca primero en la unidad A: y
 	luego en la unidad C: hasta que halla el disco de arranque y lee el primer
 	sector o bloque de información. Este es el sector de arranque que contiene
 	las instrucciones para cargar el sistema operativo.
 
-	\subsection{Solución de problemas}{\label{sec:bios/solucion-de-problemas}}
-		\subsubsection{Pitidos de la BIOS (Award)}{\label{sec:bios/tonos-de-la-bios}}
+	%\subsection{Solución de problemas}{\label{sec:bios/solucion-de-problemas}}
+		%\subsubsection{Pitidos de la BIOS (Award)}{\label{sec:bios/tonos-de-la-bios}}
 
-		En esta seccion cubriremos los significados de los pitidos de los BIOS {\em Award}. \\
-		En la mayoría de los pitidos se les acompaña un mensaje de error. 
+		%En esta seccion cubriremos los significados de los pitidos de los BIOS {\em Award}. \\
+		%En la mayoría de los pitidos se les acompaña un mensaje de error. 
 
-			\paragraph{Tono ininterrumpido}:
+			%\paragraph{Tono ininterrumpido}:
 			
-			Fallo en el suministro elctrico. Revisamos las conexiones y la fuente
-			de alimentación.  Tonos cortos constantes: Sobrecarga elctrica, chips
-			defectuosos, placa mal.
+			%Fallo en el suministro elctrico. Revisamos las conexiones y la fuente
+			%de alimentación.  Tonos cortos constantes: Sobrecarga elctrica, chips
+			%defectuosos, placa mal.
 
-			\paragraph{1 largo}:
+			%\paragraph{1 largo}:
 
-			Si aparece esto en la pantalla “RAM Refresh Failure”, significa que los
-			diferentes componentes encargados del refresco de la memoria RAM fallan
-			o no están presentes. Cambiar de banco la memoria y comprobar los
-			jumpers de buses. 
+			%Si aparece esto en la pantalla “RAM Refresh Failure”, significa que los
+			%diferentes componentes encargados del refresco de la memoria RAM fallan
+			%o no están presentes. Cambiar de banco la memoria y comprobar los
+			%jumpers de buses. 
 
-			\paragraph{1 largo y 1 corto}: 
+			%\paragraph{1 largo y 1 corto}: 
 
-			El código de la BIOS esta corrupto o defectuoso, probaremos a flasear o
-			reemplazamos el chip de la BIOS sino podemos cambiamos de placa. 
+			%El código de la BIOS esta corrupto o defectuoso, probaremos a flasear o
+			%reemplazamos el chip de la BIOS sino podemos cambiamos de placa. 
 
-			\paragraph{1 largo y dos cortos}:
+			%\paragraph{1 largo y dos cortos}:
 			
-			No da señal de imagen, se trata de que nuestra tarjeta de vídeo esta
-			estropeada, probaremos a pincharla en otro slot o probaremos otra
-			tarjeta gráfica. 
+			%No da señal de imagen, se trata de que nuestra tarjeta de vídeo esta
+			%estropeada, probaremos a pincharla en otro slot o probaremos otra
+			%tarjeta gráfica. 
 
-			\paragraph{1 largo y 2 cortos}:
+			%\paragraph{1 largo y 2 cortos}:
 
-			Si aparece por pantalla este mensaje: “No video card found”, este error
-			solo es aplicable a placas base con tarjetas de vídeo integradas. Fallo
-			en la tarjeta gráfica, probaremos a deshabilitarla y pincharemos una
-			nueva en cualquier slot libre o cambiaremos la placa madre. 
+			%Si aparece por pantalla este mensaje: “No video card found”, este error
+			%solo es aplicable a placas base con tarjetas de vídeo integradas. Fallo
+			%en la tarjeta gráfica, probaremos a deshabilitarla y pincharemos una
+			%nueva en cualquier slot libre o cambiaremos la placa madre. 
 
-			\paragraph{1 largo y 3 cortos}:
+			%\paragraph{1 largo y 3 cortos}:
 
-			Si aparece este mensaje por pantalla “No monitor connected” Idem que el
-			anterior. 
+			%Si aparece este mensaje por pantalla “No monitor connected” Idem que el
+			%anterior. 
 
-			\paragraph{1 largo y varios cortos}: 
+			%\paragraph{1 largo y varios cortos}: 
 
-			Mensaje de error. “Video related failure”. Lo mismo que antes. Cada
-			fabricante implanta un código de error según el tipo de tarjeta de
-			video y los parámetros de cada BIOS.
+			%Mensaje de error. “Video related failure”. Lo mismo que antes. Cada
+			%fabricante implanta un código de error según el tipo de tarjeta de
+			%video y los parámetros de cada BIOS.
 
-			\paragraph{2 largos y 1 corto}:
+			%\paragraph{2 largos y 1 corto}:
 			
-			Fallo en la sincronización de las imágenes. Cargaremos por defecto los
-			valores de la BIOS e intentaremos reiniciar. Si persiste nuestra
-			tarjeta gráfica o placa madre están estropeadas. 
+			%Fallo en la sincronización de las imágenes. Cargaremos por defecto los
+			%valores de la BIOS e intentaremos reiniciar. Si persiste nuestra
+			%tarjeta gráfica o placa madre están estropeadas. 
 
-			\paragraph{2 cortos}:
+			%\paragraph{2 cortos}:
 			
-			Vemos en la pantalla este error: “Parity Error”. Se trata de un error
-			en la configuración de la BIOS al no soportar la paridad de memoria, la
-			deshabilitamos en al BIOS. 
+			%Vemos en la pantalla este error: “Parity Error”. Se trata de un error
+			%en la configuración de la BIOS al no soportar la paridad de memoria, la
+			%deshabilitamos en al BIOS. 
 
-			\paragraph{3 cortos}:
+			%\paragraph{3 cortos}:
 			
-			Vemos en la pantalla este error. Base 64 Kb “Memory Failure”, significa
-			que la BIOS al intentar leer los primeros 64Kbytes de memoria RAM
-			dieron error. Cambiamos la RAM instalada por otra. 
+			%Vemos en la pantalla este error. Base 64 Kb “Memory Failure”, significa
+			%que la BIOS al intentar leer los primeros 64Kbytes de memoria RAM
+			%dieron error. Cambiamos la RAM instalada por otra. 
 
-			\paragraph{4 cortos}:
+			%\paragraph{4 cortos}:
 			
-			Mensaje de error; “Timer not operational”. El reloj de la propia placa
-			base esta estropeado, no hay más solución que cambiar la placa. No
-			confundir con “CMOS cheksum error” una cosa es la pila y otra el
-			contador o reloj de la placa base. 
+			%Mensaje de error; “Timer not operational”. El reloj de la propia placa
+			%base esta estropeado, no hay más solución que cambiar la placa. No
+			%confundir con “CMOS cheksum error” una cosa es la pila y otra el
+			%contador o reloj de la placa base. 
 
-			\paragraph{5 cortos}:
+			%\paragraph{5 cortos}:
 			
-			Mensaje por pantalla ``Processor Error'' significa que la CPU ha generado
-			un error porque el procesador o la memoria de vídeo están bloqueados. 
+			%Mensaje por pantalla ``Processor Error'' significa que la CPU ha generado
+			%un error porque el procesador o la memoria de vídeo están bloqueados. 
 
-			\paragraph{6 cortos}:
+			%\paragraph{6 cortos}:
 
-			Mensaje de error: ``8042 - Gate A20 Failure'', muy mítico este error.
-			El controlador o procesador del teclado (8042) puede estar en mal
-			estado. 
-			La BIOS no puede conmutar en modo protegido. Este error se
-			suele dar cuando se conecta/desconecta el teclado con el ordenador
-			encendido. 
+			%Mensaje de error: ``8042 - Gate A20 Failure'', muy mítico este error.
+			%El controlador o procesador del teclado (8042) puede estar en mal
+			%estado. 
+			%La BIOS no puede conmutar en modo protegido. Este error se
+			%suele dar cuando se conecta/desconecta el teclado con el ordenador
+			%encendido. 
 
-			\paragraph{7 cortos}:
+			%\paragraph{7 cortos}:
 			
-			Mensaje de error: “Processor Exception / Interrupt Error” Descripción. La CPU ha generado una interrupción excepcional o el modo virtual del procesador está activo. Procesador a punto de morirse. 
+			%Mensaje de error: “Processor Exception / Interrupt Error” Descripción. La CPU ha generado una interrupción excepcional o el modo virtual del procesador está activo. Procesador a punto de morirse. 
 
-			\paragraph{8 cortos}:
+			%\paragraph{8 cortos}:
 			
-			Mensaje de error: ``Display Memory Read / Write error''. La tarjeta de video esta estropeada, procedemos a cambiarla. 
+			%Mensaje de error: ``Display Memory Read / Write error''. La tarjeta de video esta estropeada, procedemos a cambiarla. 
 
-			\paragraph{9 cortos}:
+			%\paragraph{9 cortos}:
 			
-			Mensaje de error: ``ROM Checksum Error''; el valor del checksum (conteo de la memoria) de la RA
+			%Mensaje de error: ``ROM Checksum Error''; el valor del checksum (conteo de la memoria) de la RA
 
-		\newpage
+		%\newpage
 
-		\subsubsection{Errores en pantalla}\label{sub:errores en pantalla}
+		%\subsubsection{Errores en pantalla}\label{sub:errores en pantalla}
 		
-		Los siguientes errores de pantalla son errores generales o bien, no dependen de marca y modelo de la BIOS:
+		%Los siguientes errores de pantalla son errores generales o bien, no dependen de marca y modelo de la BIOS:
 
-			\paragraph{BIOS ROM checksum error – system halted}
+			%\paragraph{BIOS ROM checksum error – system halted}
 
-			El código de control de la BIOS es incorrecto, lo que indica que puede
-			estar corrupta. En caso de reiniciar y repetir el mensaje, tendremos
-			que reemplazar al BIOS.
+			%El código de control de la BIOS es incorrecto, lo que indica que puede
+			%estar corrupta. En caso de reiniciar y repetir el mensaje, tendremos
+			%que reemplazar al BIOS.
 
-			\paragraph{CMOS battery failed}
+			%\paragraph{CMOS battery failed}
 
-			La pila de la placa base que alimenta la memoria CMOS ha dejado de
-			suministrar corriente. Es necesario cambiar la pila inmediatamente.
+			%La pila de la placa base que alimenta la memoria CMOS ha dejado de
+			%suministrar corriente. Es necesario cambiar la pila inmediatamente.
 
-			\paragraph{CMOS checksum error – Defaults loaded}
+			%\paragraph{CMOS checksum error – Defaults loaded}
 
-			El código de control de la CMOS no es correcto, por lo que se
-			procede a cargar los parámetros de la BIOS por defecto. Este error
-			se produce porque la información almacenada en la CMOS es
-			incorrecta, lo que puede indicar que la pila está empezando a
-			fallar.
+			%El código de control de la CMOS no es correcto, por lo que se
+			%procede a cargar los parámetros de la BIOS por defecto. Este error
+			%se produce porque la información almacenada en la CMOS es
+			%incorrecta, lo que puede indicar que la pila está empezando a
+			%fallar.
 
-			\paragraph{Display switch is set incorrectly}
+			%\paragraph{Display switch is set incorrectly}
 
-			El tipo de pantalla especificada en la BIOS es incorrecta. Esto puede ocurrir si hemos seleccionado la existencia de un adaptador monocromo cuando tenemos uno en color, o al contrario. Bastará con poner bien este parámetro para solucionar el problema.
+			%El tipo de pantalla especificada en la BIOS es incorrecta. Esto puede ocurrir si hemos seleccionado la existencia de un adaptador monocromo cuando tenemos uno en color, o al contrario. Bastará con poner bien este parámetro para solucionar el problema.
 
-			\paragraph{Floppy disk(s) Fail} 
+			%\paragraph{Floppy disk(s) Fail} 
 			
-			(code 40/38/48 dependiendo de la antigüedad de la bios)
+			%(code 40/38/48 dependiendo de la antigüedad de la bios)
 
-			Disquetera mal conectada, verificamos todos los cables de conexión.
+			%Disquetera mal conectada, verificamos todos los cables de conexión.
 
-			\paragraph{Hard disk install failure}
+			%\paragraph{Hard disk install failure}
 
-			La BIOS no es capaz de inicializar o encontrar el disco duro de
-			manera correcta. Debemos estar seguros de que todos de que todos
-			los discos se encuentren bien conectados y correctamente
-			configurados.
+			%La BIOS no es capaz de inicializar o encontrar el disco duro de
+			%manera correcta. Debemos estar seguros de que todos de que todos
+			%los discos se encuentren bien conectados y correctamente
+			%configurados.
 
-			\paragraph{Keyboard error or no keyboard present}
+			%\paragraph{Keyboard error or no keyboard present}
 
-			No es posible inicializar el teclado. Puede ser debido a que no se
-			encuentre conectado, este estropeado e incluso porque mantenemos
-			pulsada alguna tecla durante el proceso de arranque.
+			%No es posible inicializar el teclado. Puede ser debido a que no se
+			%encuentre conectado, este estropeado e incluso porque mantenemos
+			%pulsada alguna tecla durante el proceso de arranque.
 
-			\paragraph{Keyboard error is locked out – Unlock the key}
+			%\paragraph{Keyboard error is locked out – Unlock the key}
 
-			Este mensaje solo aparece en muy pocas BIOS, cuando alguna tecla ha
-			quedado presionada. 
+			%Este mensaje solo aparece en muy pocas BIOS, cuando alguna tecla ha
+			%quedado presionada. 
 
-			\paragraph{Memory Test Fail}
+			%\paragraph{Memory Test Fail}
 
-			El chequeo de memoria RAM ha fallado debido probablemente, a
-			errores en los módulos de memoria. En caso de que nos aparezca este
-			mensaje, hemos de tener mucha precaución con el equipo, se puede
-			volver inestable y tener prdidas de datos. Solución, comprobar que
-			banco de memoria está mal, y sustituirlo inmediatamente. 
+			%El chequeo de memoria RAM ha fallado debido probablemente, a
+			%errores en los módulos de memoria. En caso de que nos aparezca este
+			%mensaje, hemos de tener mucha precaución con el equipo, se puede
+			%volver inestable y tener prdidas de datos. Solución, comprobar que
+			%banco de memoria está mal, y sustituirlo inmediatamente. 
 
-			\paragraph{Override enabled – Defaults loaded}
+			%\paragraph{Override enabled – Defaults loaded}
 
-			Si el sistema no puede iniciarse con los valores almacenados en la
-			CMOS, la BIOS puede optar por sustituir estos por otros genricos
-			diseñados para que todo funcione de manera estable, aunque sin
-			obtener las mayores prestaciones. 
+			%Si el sistema no puede iniciarse con los valores almacenados en la
+			%CMOS, la BIOS puede optar por sustituir estos por otros genricos
+			%diseñados para que todo funcione de manera estable, aunque sin
+			%obtener las mayores prestaciones. 
 
-			\paragraph{Primary master hard diskfail}
+			%\paragraph{Primary master hard diskfail}
 
-			El proceso de arranque ha detectado un fallo al iniciar el disco
-			colocado como maestro en el controlador IDE primario. Para
-			solucionar comprobaremos las conexiones del disco y la
-			configuración de la BIOS. 
+			%El proceso de arranque ha detectado un fallo al iniciar el disco
+			%colocado como maestro en el controlador IDE primario. Para
+			%solucionar comprobaremos las conexiones del disco y la
+			%configuración de la BIOS. 
 	
-	\subsection{Actualizar el BIOS}\label{sec:actualizar el bios}
 
 	\newpage
-
 \section{El CMOS Setup}{\label{sec:cmossetup}}
 
 	El CMOS Setup es un conjunto de instrucciones en la BIOS que permite
@@ -417,8 +427,64 @@ Cada equipo cuenta con varios BIOS:
 
 	En los BIOS Award, se muestran los siguientes mensajes durante el POST:
 	PARA INGRESAR A LA CONFIGURACIÓN ANTES DE REINICIAR PRESIONE CTRL-ALT-ESC O LA TECLA DEL
-	\subsection{Opciones en la CMOS Setup}
-	%%% COMPLETAR!
+
+	\newpage
+	\subsection{Pantallas en el CMOS Setup}{\label{sub:pantallas en el cmos setup}}
+
+		\subsubsection{Pantalla Principal}{\label{sub:pantalla principal}}
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.6]{presentacion/00.png}
+				\caption{La pantalla principal del CMOS Setup.}
+			\end{figure}
+
+		\subsubsection{Standard CMOS Setup}{\label{sub:Standard cmos setup}}
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{presentacion/01.png}
+				\caption{La pantalla del ``Standard CMOS Setup''.}
+			\end{figure}
+
+		\subsubsection{BIOS Features Setup}{\label{sub:bios features setup}}
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{presentacion/02.png}
+				\caption{``BIOS Features Setup''}
+			\end{figure}
+
+			\paragraph{CPU Level 1\&2 Cache}
+			Activa o desactiva la cache de primer y segundo nivel integrada en
+			el núcleo del procesador.
+			\paragraph{Boot Sequence}
+			Indica el orden de búsqueda de la unidad en la que arrancará el
+			sistema operativo.
+			\paragraph{Boot Up NumLock Status}
+			En ``ON'', la BIOS activa automáticamente la tecla ``NumLock'' del
+			teclado numérico en el proceso de arranque.
+
+		
+		\subsubsection{Chipset Features Setup}{\label{sub:chipset features setup}}
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{presentacion/03.png}
+				\caption{``Chipset Features Setup''.}
+			\end{figure}
+
+		\subsubsection{Power Management Setup}{\label{sub:power management setup}}
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{presentacion/04.png}
+				\caption{``Power Management Setup''.}
+			\end{figure}
+
+		\subsubsection{PNP/PCI Configuration}{\label{sub:pnp/pci configuration}}
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.5]{presentacion/05.png}
+				\caption{``Configuracion de PNP/PCI''.}
+			\end{figure}
+
+		\newpage
 
 	\subsection{Restaurar la configuración del CMOS Setup}{\label{sec:cmossetup/resetear-el-cmos-setup}}
 
