@@ -1,0 +1,26 @@
+\section{Introducción}\label{sec:introduccion}
+
+Cuando encendemos la computadora, el sistema operativo se encuentra o bien, en
+el disco duro o bien en un disquete; sin embargo, si se supone que es el
+sistema operativo el que debe dar soporte para estos dispositivos, {\em ¿cómo podría
+hacerlo si aún no está cargado en memoria?}
+
+Lo que es más:
+\begin{itemize}
+	\item ¿Cómo sabe la computadora que tiene un disco duro (o varios)?
+	\item ¿Y la disquetera?  
+	\item ¿Cómo y dónde guarda esos datos, junto con el tipo de memoria y cache?
+	\item ¿O algo tan sencillo pero importante como la fecha y la hora? 
+\end{itemize}
+
+Por ende, la unidad y programa que se encarga de todo esto es la BIOS.
+Resulta evidente que la BIOS debe poderse modificar para alterar estos datos
+(al añadir un disco duro o cambiar al horario de verano, por ejemplo); por ello
+las BIOS se implementan en memoria. \\
+Pero además debe mantenerse cuando apaguemos nuestra pc, porque no tendría
+sentido tener que introducir todos los datos en cada arranque; por eso se usan
+memorias especiales, que no se borran al apagar el ordenador: memorias tipo
+CMOS (no volatil), por lo que muchas veces el programa que modifica la BIOS se
+denomina {\bf CMOS Setup}.
+
+\newpage

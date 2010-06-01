@@ -1,0 +1,84 @@
+\section{Conceptos}\label{sec:conceptos}
+
+	\subsection{La RAM}{\label{sec:conceptos/RAM}}
+
+		La memoría de acceso aleatorio (en {\bfseries inglés Random Access Memory} cuyo
+		acrónimo es {\bfseries RAM}) es la memoría donde el procesador recibe las
+		instrucciones y guarda los resultados. Es el área de trabajo paara la mayor
+		parte del software de un computador.
+
+	\subsection{La ROM}{\label{sec:conceptos/ROM}}
+
+		Memoría de solo lectura ({\bfseries Read-only memory}) es una
+		clase de medio de almacenamiento usado en los ordenadores y otros dispositivos
+		electrónicos. Los
+		datos en la ROM no se pueden modificar al menos no de una manera rápida o fácil
+		y se usa principalmente para contener el Firmware.
+
+	\subsection{El Firmware}{\label{sec:conceptos/firmware}}
+
+		Firmware o programación en firme, es un bloque de instrucciones de
+		programa para propositos específicos grabada en una memoría de tipo no volátil
+		( ROM, EPROM, Flash, ...) que establece la lógica de más bajo nivel que
+		controla los circuitos electrónicos de un dispositivo de cualquier tipo.
+
+	\subsection{El CMOS}{\label{sec:conceptos/CMOS}}
+
+		{\bf CMOS} es la contracción de {\em Complementary Metal Oxide Semiconductor}, o
+		Tecnología Metal Óxido Semiconductor Complementario. \\
+		Es una tecnología utilizada para fabricar circuitos integrados (chips), que
+		para el caso es un memoria del tipo ROM, en la actualidad FLASH ROM (se
+		borran electricamente) donde se guarda información básica del equipo como el
+		BIOS y el SETUP. \\ 
+		{\bf Esta memoria tiene una porción que funciona como RAM, donde se guarda la
+		configuración que el usuario le da al equipo y algunas configuraciones
+		establecidas de fábrica.} \\ 
+		Otra información que se guarda en el y que se accede mediante el SETUP
+		es la fecha y la hora del sistema, y para que la misma se mantenga
+		actualizada debe estar siempre alimentada, es por esto que en toda
+		computadora encontraremos una pila para alimentar dicho circuito.
+
+		\subsubsection{El RAM-CMOS}\label{sub:el ram-cmos}
+			RAM-CMOS es un tipo de memoria en que se guardan los datos que se
+			pueden configurar del BIOS y contiene información básica sobre algunos
+			recursos del sistema que son susceptibles de ser modificados como el
+			disco duro, el tipo de disco flexible, etc. \\
+			Esta información es almacenada en una RAM, de 64 bytes de capacidad,
+			con tecnología CMOS, que le proporciona el bajo consumo necesario para
+			ser alimentada por una pila que se encuentra en la placa base y que
+			debe durar años, al ser necesario que este alimentada constantemente,
+			incluso cuando el ordenador se encuentra apagado. Para ello
+			antiguamente se usaba una batería recargable que se cargaba cuando el
+			ordenador se encendía. \\
+			Mas modernamente se ha sustituido por una pila desechable de litio
+			(generalmente modelo CR-2032) y que dura de 2 a 5 años.
+
+	\subsection{El BIOS}{\label{sec:conceptos/BIOS}}
+
+		BIOS es la contracción de Basic Input Output System, o Sistema Básico de
+		Entrada – Salida. \\
+		Es un programa muy básico, normalmente programado en lenguaje ensamblador,
+		cuya misión es la de arrancar o posibilitar el ``Booteo'' de la computadora.
+		A pesar de tratarse de un programa sumamente básico resulta totalmente
+		indispensable, ya que sin el BIOS sería imposible que una computadora pudiera
+		iniciar.
+
+	\subsection{CMOS Setup}\label{sub:cmos setup}
+	
+		Basicamente el CMOS Setup es el programa que puede modificar todos los parametros
+		guardada en la CMOS de forma visual y tangible (con el teclado). \\
+		El CMOS Setup es una serie de instrucciones generalmente escrito en
+		lenguaje Ensemblador que se lee de la BIOS al arrancar la computadora. \\
+		Se suelen usar los terminos CMOS Setup y BIOS Setup como sinonimos para
+		indicar lo mismo, pero son dos diferentes circuitos en la placa base. \\
+
+	\subsection{LBA}\label{sec:lba}
+
+		LBA (siglas de logical block addressing, dirección lógica de bloques)
+		es un método muy común usado para especificar la localización de los
+		bloques de datos en los sistemas de almacenamiento, principalmente
+		secundario, del ordenador. El término LBA puede referirse también a la
+		dirección del bloque al que enlaza.  Los bloques lógicos en los
+		ordenadores modernos son normalmente de 512 o 1024 bytes cada uno.
+
+	\newpage
