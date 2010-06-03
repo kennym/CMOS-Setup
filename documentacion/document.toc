@@ -1,45 +1,50 @@
 \select@language {spanish}
 \select@language {spanish}
-\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{4}
-\contentsline {section}{\numberline {2}Conceptos}{5}
-\contentsline {subsection}{\numberline {2.1}La RAM}{5}
-\contentsline {subsection}{\numberline {2.2}La ROM}{5}
-\contentsline {subsection}{\numberline {2.3}El Firmware}{5}
-\contentsline {subsection}{\numberline {2.4}El CMOS}{5}
-\contentsline {subsection}{\numberline {2.5}La BIOS}{5}
-\contentsline {section}{\numberline {3}El BIOS}{6}
-\contentsline {subsection}{\numberline {3.1}El arrancar de la Computadora}{6}
-\contentsline {subsection}{\numberline {3.2}Que hace el BIOS?}{6}
-\contentsline {subsection}{\numberline {3.3}Configuracion de la BIOS}{6}
-\contentsline {subsection}{\numberline {3.4}Solucion de problemas}{7}
-\contentsline {subsubsection}{\numberline {3.4.1}Pitidos de la BIOS (Award)}{7}
-\contentsline {paragraph}{Tono ininterrumpido}{7}
-\contentsline {paragraph}{1 largo}{7}
-\contentsline {paragraph}{1 largo y 1 corto}{7}
-\contentsline {paragraph}{1 largo y dos cortos}{7}
-\contentsline {paragraph}{1 largo y 2 cortos}{7}
-\contentsline {paragraph}{1 largo y 3 cortos}{7}
-\contentsline {paragraph}{1 largo y varios cortos}{7}
-\contentsline {paragraph}{2 largos y 1 corto}{8}
-\contentsline {paragraph}{2 cortos}{8}
-\contentsline {paragraph}{3 cortos}{8}
-\contentsline {paragraph}{4 cortos}{8}
-\contentsline {paragraph}{5 cortos}{8}
-\contentsline {paragraph}{6 cortos}{8}
-\contentsline {paragraph}{7 cortos}{8}
-\contentsline {paragraph}{8 cortos}{8}
-\contentsline {paragraph}{9 cortos}{8}
-\contentsline {subsubsection}{\numberline {3.4.2}Errores en pantalla}{9}
-\contentsline {paragraph}{BIOS ROM checksum error \IeC {\textendash } system halted}{9}
-\contentsline {paragraph}{CMOS battery failed}{9}
-\contentsline {paragraph}{CMOS checksum error \IeC {\textendash } Defaults loaded}{9}
-\contentsline {paragraph}{Display switch is set incorrectly}{9}
-\contentsline {paragraph}{Floppy disk(s) Fail}{9}
-\contentsline {paragraph}{Hard disk install failure}{9}
-\contentsline {paragraph}{Keyboard error or no keyboard present}{9}
-\contentsline {paragraph}{Keyboard error is locked out \IeC {\textendash } Unlock the key}{9}
-\contentsline {paragraph}{Memory Test Fail}{9}
-\contentsline {paragraph}{Override enabled \IeC {\textendash } Defaults loaded}{10}
-\contentsline {paragraph}{Primary master hard diskfail}{10}
-\contentsline {section}{\numberline {4}El CMOS Setup}{11}
-\contentsline {subsection}{\numberline {4.1}Resetear el CMOS Setup}{11}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{4}{section.1}
+\contentsline {section}{\numberline {2}Conceptos}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}La RAM}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}La ROM}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}El Firmware}{5}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}El CMOS}{5}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}El RAM-CMOS}{5}{subsubsection.2.4.1}
+\contentsline {subsection}{\numberline {2.5}El BIOS}{6}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}CMOS Setup}{6}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}LBA}{6}{subsection.2.7}
+\contentsline {section}{\numberline {3}El proceso de inicio}{7}{section.3}
+\contentsline {section}{\numberline {4}El BIOS}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}Marcas de BIOS}{8}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Modelos de BIOS}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Tipos de BIOS}{9}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Errores en pantalla}{9}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}BIOS ROM checksum error \IeC {\textendash } system halted}{9}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}CMOS battery failed}{10}{subsubsection.4.4.2}
+\contentsline {subsubsection}{\numberline {4.4.3}CMOS checksum error \IeC {\textendash } Defaults loaded}{10}{subsubsection.4.4.3}
+\contentsline {subsubsection}{\numberline {4.4.4}Display switch is set incorrectly}{10}{subsubsection.4.4.4}
+\contentsline {subsubsection}{\numberline {4.4.5}Floppy disk(s) Fail}{10}{subsubsection.4.4.5}
+\contentsline {subsubsection}{\numberline {4.4.6}Hard disk install failure}{10}{subsubsection.4.4.6}
+\contentsline {subsubsection}{\numberline {4.4.7}Keyboard error or no keyboard present}{10}{subsubsection.4.4.7}
+\contentsline {subsubsection}{\numberline {4.4.8}Keyboard error is locked out \IeC {\textendash } Unlock the key}{10}{subsubsection.4.4.8}
+\contentsline {subsubsection}{\numberline {4.4.9}Memory Test Fail}{10}{subsubsection.4.4.9}
+\contentsline {subsubsection}{\numberline {4.4.10}Override enabled \IeC {\textendash } Defaults loaded}{11}{subsubsection.4.4.10}
+\contentsline {subsubsection}{\numberline {4.4.11}Primary master hard diskfail}{11}{subsubsection.4.4.11}
+\contentsline {section}{\numberline {5}El CMOS Setup}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}Pantallas en el CMOS Setup}{13}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}Pantalla Principal}{13}{subsubsection.5.1.1}
+\contentsline {subsubsection}{\numberline {5.1.2}Standard CMOS Setup}{13}{subsubsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.3}BIOS Features Setup}{16}{subsubsection.5.1.3}
+\contentsline {paragraph}{CPU Level 1\&2 Cache}{16}{section*.2}
+\contentsline {paragraph}{Boot Sequence}{16}{section*.3}
+\contentsline {paragraph}{Boot Up NumLock Status}{16}{section*.4}
+\contentsline {subsubsection}{\numberline {5.1.4}Chipset Features Setup}{17}{subsubsection.5.1.4}
+\contentsline {subsubsection}{\numberline {5.1.5}Power Management Setup}{18}{subsubsection.5.1.5}
+\contentsline {subsubsection}{\numberline {5.1.6}PNP/PCI Configuration}{19}{subsubsection.5.1.6}
+\contentsline {subsection}{\numberline {5.2}Restaurar la configuraci\IeC {\'o}n del CMOS Setup}{20}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Bater\IeC {\'\i }a CMOS}{20}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}El RESET CMOS}{20}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.3}Metodo programativo}{20}{subsubsection.5.2.3}
+\contentsline {section}{\numberline {A}Anexo}{22}{appendix.A}
+\contentsline {subsection}{\numberline {A.1}POST}{22}{subsection.A.1}
+\contentsline {subsection}{\numberline {A.2}CPU Cache}{22}{subsection.A.2}
+\contentsline {subsection}{\numberline {A.3}IEEE 1284 (LPT)}{22}{subsection.A.3}
+\contentsline {subsection}{\numberline {A.4}Plug-and-Play}{22}{subsection.A.4}
+\contentsline {section}{\numberline {B}Bibliograf\IeC {\'\i }a}{23}{appendix.B}
