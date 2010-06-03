@@ -5,45 +5,10 @@
 %	* Kenny Meyer
 %	* Ana Benitez
 %	* Maria Monsserat Silva
-%	* Fabiola Ruiz Diaz
-%
+%	* Fabiola Ruiz Leiva
 \documentclass[12pt,oneside,a4paper]{article}
-%% Use the Arial font:
-\usepackage[T1]{fontenc}
-\usepackage[scaled]{times}
-\renewcommand*\familydefault{\sfdefault}
 
-%%% Provide underlining:
-%\usepackage{ulem}
-
-%% Provide graphics support:
-
-%% EN: Set language to Spanish
-%% ES: Definir idioma como Castellano
-\usepackage[spanish]{babel}
-\selectlanguage{spanish}
-
-\usepackage[pdftex]{graphicx}
-\usepackage{graphicx}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-\usepackage{float}
-\usepackage[utf8]{inputenc}
-\usepackage{url} % para URLs en la bibliografía
-
-%% EN: Set page geometry
-%% ES: Definir la geometria de la pagina
-\usepackage[a4paper]{geometry}
-\geometry{top=4.0cm, bottom=3.0cm, left=2.01cm, right=2.01cm}
-
-%% Make a fancy header/footer
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-%% Define custom header:
-\fancyhead{}
-\fancyhead[CO,CE]{\bfseries{CMOS Setup}}
-%% Define custom footer:
-\fancyfoot{}
-\fancyfoot[C]{\thepage}
+\usepackage{style}
 
 \begin{document}
 \title{CMOS Setup}
@@ -59,348 +24,423 @@
 %  * La documentacion sera leida por los companeros
 %  * Tiene que ser comprensiva y completa.
 %
+
+% The basic structure of the project:
+% 
 \setcounter{tocdepth}{3}
 \tableofcontents
 \newpage
 
-\section{Introducción}{\label{sec:introduccion}}
+\input{./tex/introduccion.tex}
+\input{./tex/conceptos.tex}
+\section{El proceso de inicio}\label{sec:arranque}
 
-Cuando encendemos la computadora, el sistema operativo se encuentra o bien, en
-el disco duro o bien en un disquete; sin embargo, si se supone que es el
-sistema operativo el que debe dar soporte para estos dispositivos, {\em ¿cómo podría
-hacerlo si aún no está cargado en memoria?}
+	%The system BIOS is what starts the computer running when you turn it on.
+	%The following are the steps that a typical boot sequence involves. Of
+	%course this will vary by the manufacturer of your hardware, BIOS, etc., and
+	%especially by what peripherals you have in the PC. Here is what generally
+	%happens when you turn on your system power:
 
-Lo que es más:
-\begin{itemize}
-	\item ¿Cómo sabe la computadora que tiene un disco duro (o varios)?
-	\item ¿Y la disquetera?  
-	\item ¿Cómo y dónde guarda esos datos, junto con el tipo de memoria y cache?
-	\item ¿O algo tan sencillo pero importante como la fecha y la hora? 
-\end{itemize}
+	\begin{enumerate}
+		\item[1]El sistema BIOS es lo que inicia la computadora cuando la
+			encendemos.  Los siguientes pasos son los pasos que involucra la
+			secuencia de booteo típico.  Por supuesto esto depende del
+			fabricante de la hardware, BIOS, etc., y especialmente por los
+			perífericos de la PC. Esto es lo que pasa por lo general cuando
+			encendemos la energía de la computadora.
 
-Por ende, la unidad y programa que se encarga de todo esto es la BIOS.
-Resulta evidente que la BIOS debe poderse modificar para alterar estos datos
-(al añadir un disco duro o cambiar al horario de verano, por ejemplo); por ello
-las BIOS se implementan en memoria. \\
-Pero además debe mantenerse cuando apaguemos nuestra pc, porque no tendría
-sentido tener que introducir todos los datos en cada arranque; por eso se usan
-memorias especiales, que no se borran al apagar el ordenador: memorias tipo
-CMOS (no volatil), por lo que muchas veces el programa que modifica la BIOS se
-denomina {\bf CMOS Setup}.
+	%The internal power supply turns on and initializes. The power supply takes
+	%some time until it can generate reliable power for the rest of the
+	%computer, and having it turn on prematurely could potentially lead to
+	%damage. Therefore, the chipset will generate a reset signal to the
+	%processor (the same as if you held the reset button down for a while on
+	%your case) until it receives the Power Good signal from the power supply.
+	
+		\item[2] La fuente de alimentación interna se enciende y se inicializa.
+			La fuente de alimentación necesita algún tiempo para generar
+			energía seguro para el resto de la computadora, y enciendola antes
+			de tiempo potencialmente puede causar daños. Por lo tanto el
+			chipset va a enviar una señal de reseteo al procesador (es lo mismo
+			que como si uno fuera apretando el botón de RESET) hasta que recibe
+			el ``Power Good'' señal de la fuente de alimentación.
 
-\newpage
+	%When the reset button is released, the processor will be ready to start
+	%executing. When the processor first starts up, it is suffering from
+	%amnesia; there is nothing at all in the memory to execute.  Of course
+	%processor makers know this will happen, so they pre-program the processor
+	%to always look at the same place in the system BIOS ROM for the start of
+	%the BIOS boot program. This is normally location FFFF0h, right at the end
+	%of the system memory. They put it there so that the size of the ROM can be
+	%changed without creating compatibility problems. Since there are only 16
+	%bytes left from there to the end of conventional memory, this location just
+	%contains a "jump" instruction telling the processor where to go to find the
+	%real BIOS startup program.  
+	
+		\item[3] Cuando el botón de resteo es liberado, el procesador va a
+			estar listo para ejecutar acciones.  Al inidcio el procesador no
+			trabaja nada; no hay nada en la memoría para ser procesado.  Por lo
+			tanto se carga instrucciones de la BIOS\ref{sec:conceptobios}
+			ROM\ref{sec:conceptorom}, normalmente en la posición de la memoría
+			FFFF0h, los últimos de 16 bits de la memoría, donde está guardada
+			la posición del programa del BIOS booteo o bien POST(Auto
+			diagnóstico al encender) para ser procesadas.
 
-	\section{Conceptos}{\label{sec:conceptos}}
+	%The BIOS performs the power-on self test (POST). If there are
+	%any fatal errors, the boot process stops. POST beep codes can be found in this
+	%area of the Troubleshooting Expert.
+	
+		\item[4] El BIOS realiza el POST(Auto diagnóstico al encebuiltinnder). Si hay une
+			error fatal, el proceso de inicio se detiene. Errores son desplegadas
+			por una secuencia de pítidos con significados concretos.
+	
+	%The BIOS looks for the video card. In particular, it looks for the video
+	%card's built in BIOS program and runs it.  This BIOS is normally found at
+	%location C000h in memory. The system BIOS executes the video card BIOS,
+	%which initializes the video card. Most modern cards will display
+	%information on the screen about the video card. (This is why on a modern PC
+	%you usually see something on the screen about the video card before you see
+	%the messages from the system BIOS itself).  The BIOS then looks for other
+	%devices' ROMs to see if any of them have BIOSes. Normally, the IDE/ATA hard
+	%disk BIOS will be found at C8000h and executed. If any other device BIOSes
+	%are found, they are executed as well.  
 
-		\subsection{La RAM}{\label{sec:conceptos/RAM}}
+		\item[5] El BIOS busca la tarjeta de video. En particular, busca el
+			Firmware de la tarjeta de video y lo ejecuta. Este firmware
+			generalmente se encuentra en la posicion de memoria C000h.  El
+			sistema BIOS ejecuta el Firmware de la tarjeta de video, lo cual
+			inicializa la tarjeta. La mayoria de las tarjetas de video modernas
+			van a desplegar informacion en pantalla acerca de la tarjeta de
+			video. (Esta es la razon, por la cual ves mensajes en la pantalla
+			al inciar la computadora) El BIOS entonces busca los Firmwares de
+			otros dispositivos para ver si estos tienen BIOSes.
+				
+	%The BIOS displays its
+	%startup screen.  
+		\item[6] El BIOS muestra la pantalla inicial.
+			\begin{figure}[H]
+				\centering
+					\includegraphics[scale=0.3]{img/Screenshot-Ingresando_al_BIOS_Setup-1.png}
+				\caption{El BIOS al encender la computadora.}
+			\end{figure}
+	
+    %The BIOS does more tests on the system, including the memory
+	%count-up test which you see on the screen. The BIOS will generally display a
+	%text error message on the screen if it encounters an error at this point; these
+	%error messages and their explanations can be found in this part of the
+	%Troubleshooting Expert.  
 
-		La memoría de acceso aleatorio (en {\bfseries inglés Random Access Memory} cuyo
-		acrónimo es {\bfseries RAM}) es la memoría donde el procesador recibe las
-		instrucciones y guarda los resultados. Es el área de trabajo paara la mayor
-		parte del software de un computador.
+	\item[6] El BIOS hace mas pruebas del sistema, incluyendo el conteo de memoria
+		RAM. \\
+		Generalmente ahora si ocurren errores fatales se los desplegara en la
+		pantalla en vez de una notificación auditiva.
 
-		\subsection{La ROM}{\label{sec:conceptos/ROM}}
+	%The BIOS performs a "system inventory" of sorts, doing
+	%more tests to determine what sort of hardware is in the system. Modern BIOSes
+	%have many automatic settings and will determine memory timing (for example)
+	%based on what kind of memory it finds. Many BIOSes can also dynamically set
+	%hard drive parameters and access modes, and will determine these at roughly
+	%this time. Some will display a message on the screen for each drive they detect
+	%and configure this way. The BIOS will also now search for and label logical
+	%devices (COM and LPT ports).  
 
-		Memoría de solo lectura ({\bfseries Read-only memory}) es una
-		clase de medio de almacenamiento usado en los ordenadores y otros dispositivos
-		electrónicos. Los
-		datos en la ROM no se pueden modificar al menos no de una manera rápida o fácil
-		y se usa principalmente para contener el Firmware.
+	%If the BIOS supports the Plug and Play standard,
+	%it will detect and configure Plug and Play devices at this time and display a
+	%message on the screen for each one it finds. See here for more details on how
+	%PnP detects devices and assigns resources.  
+	\item[7] El BIOS ahora realiza un sistema de inventario de sorteos, haciendo
+		más pruebas para determinar el tipo de hardware del sistema.
+		BIOSes modernos tienen ajustes automáticos y determinarán la sincronización
+		de la memoría (por ejemplo) basado en que tipo de memoría de encuentra.
+		Muchos BIOSes tambien pueden determinar {\em automáticamente} parametros
+		del disco duro y los modos de acceso, y determinará estos aproximadamente
+		en este período.
+		Algunas desplegarán un mensaje en la pantalla para cada unidad/dispositivo que
+		se detecta y lo configura a esa manera. El BIOS ahora buscará y calificará los
+		dispositivos lógicos. \\*
+		Si el BIOS soporta el estándar {\emph Plug-and-Play }\cite{plugandplay} este detectará
+		y configurará los dispositivos {\emph Plug-and-Play} mientras y mostrará un mensaje
+		en pantalla para cada dispositivo registrado.
+	
+	%The BIOS will display a summary
+	%screen about your system's configuration. Checking this page of data can be
+	%helpful in diagnosing setup problems, although it can be hard to see because
+	%sometimes it flashes on the screen very quickly before scrolling off the top.
 
-		\subsection{El Firmware}{\label{sec:conceptos/firmware}}
+	\item[8] El BIOS mostrará un resumen en pantalla de la configuración del sistema.  Revisando
+		esta página puede ayudar en diágnosticar problemas con la configuración, a
+		pesar de que lo puede resultar díficil porque se despide muy rapidamente. \\
+		{\bf Truco:} Apretar la tecla <PAUSE>.
 
-		Firmware o programación en firme, es un bloque de instrucciones de
-		programa para propositos específicos grabada en una memoría de tipo no volátil
-		( ROM, EPROM, Flash, ...) que establece la lógica de más bajo nivel que
-		controla los circuitos electrónicos de un dispositivo de cualquier tipo.
+	%The BIOS begins the search for a drive to boot from. Most modern BIOSes contain
+	%a setting that controls if the system should first try to boot from the floppy
+	%disk (A:) or first try the hard disk (C:). Some BIOSes will even let you boot
+	%from your CD-ROM drive or other devices, depending on the boot sequence BIOS
+	%setting.
+	
+	%Having identified its target boot drive, the BIOS looks for boot
+	%information to start the operating system boot process. If it is searching a
+	%hard disk, it looks for a master boot record at cylinder 0, head 0, sector 1
+	%(the first sector on the disk); if it is searching a floppy disk, it looks at
+	%the same address on the floppy disk for a volume boot sector.
+	
+	%If it finds what
+	%it is looking for, the BIOS starts the process of booting the operating system,
+	%using the information in the boot sector. At this point, the code in the boot
+	%sector takes over from the BIOS. The DOS boot process is described in detail
+	%here. If the first device that the system tries (floppy, hard disk, etc.) is
+	%not found, the BIOS will then try the next device in the boot sequence, and
+	%continue until it finds a bootable device.  
+	
+	%If no boot device at all can be
+	%found, the system will normally display an error message and then freeze up the
+	%system. What the error message is depends entirely on the BIOS, and can be
+	%anything from the rather clear "No boot device available" to the very cryptic
+	%"NO ROM BASIC - SYSTEM HALTED". This will also happen if you have a bootable
+	%hard disk partition but forget to set it active.  
+	
+	%This process is called a
+	%"cold boot" (since the machine was off, or cold, when it started). A "warm
+	%boot" is the same thing except it occurs when the machine is rebooted using
+	%{Ctrl}+{Alt}+{Delete} or similar. In this case the POST is skipped and the boot
+	%process continues roughly at step 8 above.
 
-		\subsection{El CMOS}{\label{sec:conceptos/CMOS}}
+	\item[9] La próxima tarea del BIOS consiste en buscar un sistema operativo
+		la cual cargará en la memoría. Si la busqueda fue exitosa, el BIOS se despide
+		y vemos normalmente la pantalla de carga del sistema operativo.
 
-		{\bf CMOS} es la contracción de {\em Complementary Metal Oxide Semiconductor}, o
-		Tecnología Metal Óxido Semiconductor Complementario. \\
-		Es una tecnología utilizada para fabricar circuitos integrados (chips), que
-		para el caso es un memoria del tipo ROM, en la actualidad FLASH ROM (se
-		borran electricamente) donde se guarda información básica del equipo como el
-		BIOS y el SETUP. \\ 
-		{\bf Esta memoria tiene una porción que funciona como RAM, donde se guarda la
-		configuración que el usuario le da al equipo y algunas configuraciones
-		establecidas de fábrica.} \\ 
-		Otra información que se guarda en el y que se accede mediante el SETUP
-		es la fecha y la hora del sistema, y para que la misma se mantenga
-		actualizada debe estar siempre alimentada, es por esto que en toda
-		computadora encontraremos una pila para alimentar dicho circuito.
-
-			\subsubsection{El RAM-CMOS}\label{sub:el ram-cmos}
-			RAM-CMOS es un tipo de memoria en que se guardan los datos que se
-			pueden configurar del BIOS y contiene información básica sobre algunos
-			recursos del sistema que son susceptibles de ser modificados como el
-			disco duro, el tipo de disco flexible, etc. \\
-			Esta información es almacenada en una RAM, de 64 bytes de capacidad,
-			con tecnología CMOS, que le proporciona el bajo consumo necesario para
-			ser alimentada por una pila que se encuentra en la placa base y que
-			debe durar años, al ser necesario que este alimentada constantemente,
-			incluso cuando el ordenador se encuentra apagado. Para ello
-			antiguamente se usaba una batería recargable que se cargaba cuando el
-			ordenador se encendía. \\
-			Mas modernamente se ha sustituido por una pila desechable de litio
-			(generalmente modelo CR-2032) y que dura de 2 a 5 años.
-
-		\subsection{El BIOS}{\label{sec:conceptos/BIOS}}
-
-		BIOS es la contracción de Basic Input Output System, o Sistema Básico de
-		Entrada – Salida. \\
-		Es un programa muy básico, normalmente programado en lenguaje ensamblador,
-		cuya misión es la de arrancar o posibilitar el ``Booteo'' de la computadora.
-		A pesar de tratarse de un programa sumamente básico resulta totalmente
-		indispensable, ya que sin el BIOS sería imposible que una computadora pudiera
-		iniciar.
-
-		\subsection{CMOS Setup}\label{sub:cmos setup}
-		
-		Basicamente el CMOS Setup es el programa que puede modificar todos los parametros
-		guardada en la CMOS de forma visual y tangible (con el teclado). \\
-		El CMOS Setup es una serie de instrucciones generalmente escrito en
-		lenguaje Ensemblador que se lee de la BIOS al arrancar la computadora. \\
-		Se suelen usar los terminos CMOS Setup y BIOS Setup como sinonimos para
-		indicar lo mismo, pero son dos diferentes circuitos en la placa base. \\
-
-		\newpage
+	\end{enumerate}
 
 \section{El BIOS}{\label{sec:bios}}
 
-Es indispensable conocer el concepto y las funciones que cumple el BIOS antes de tratar el CMOS Setup.
+	Es indispensable conocer el concepto y las funciones que cumple el BIOS antes de tratar el CMOS Setup.
 
-El concepto del BIOS:
-\begin{quotation}
+	El concepto del BIOS:
+	\begin{quotation}
 
-	{\em BIOS es la contracción de Basic Input Output System, o Sistema Básico de
-	Entrada – Salida. 
-	Es un programa muy básico, normalmente programado en lenguaje ensamblador,
-	cuya misión es la de arrancar o posibilitar el “Booteo” de la computadora.
-	A pesar de tratarse de un programa sumamente básico resulta totalmente
-	indispensable, ya que sin el BIOS sería imposible que una computadora pudiera
-	iniciar.}
+		{\em BIOS es la contracción de Basic Input Output System, o Sistema Básico de
+		Entrada – Salida. 
+		Es un programa muy básico, normalmente programado en lenguaje ensamblador,
+		cuya misión es la de arrancar o posibilitar el “Booteo” de la computadora.
+		A pesar de tratarse de un programa sumamente básico resulta totalmente
+		indispensable, ya que sin el BIOS sería imposible que una computadora pudiera
+		iniciar.}
 
-\end{quotation}
-
-Cada equipo cuenta con varios BIOS: 
-\begin{itemize}
-	\item El BIOS de la placa madre 
-	\item El BIOS que controla el teclado 
-	\item El BIOS de la tarjeta de vídeo y eventualmente, 
-	\item El BIOS para controladoras SCSI, que se utiliza para iniciar
-		desde un dispositivo SCSI, el que luego se comunica con el DOS, sin
-		que se necesite un controlador adicional. 
-	\item El BIOS de la tarjeta de red para iniciar desde una red) 
-\end{itemize}
-
-	\subsection{El arrancar de la computadora}{\label{sec:bios/arranque}}
-
-	\begin{figure}
-		\centering
-			\includegraphics[scale=0.6]{presentacion/Screenshot-Ingresando_al_BIOS_Setup-1.png}
-		\caption{El BIOS al encender la computadora.}
-	\end{figure}
-
-	Cuando se acciona el botón de encendido o se presiona el botón de re-inicio
-	(Reset) la carga eléctrica inicial hace que arranque la unidad central de
-	% Fix accents
-	proceso y pide instrucciones al BIOS (instrucciones permanentes que no se
-	borran al apagar la computadora). 
-	\\ 
-	El CPU empieza a ejecutar las instrucciones, en particular la Auto prueba
-	de arranque (Power On Self Test, POST) la cual verifica la integridad de la
-	memoria, controladores, y dispositivos del sistema. 
-	\\ 
-	Actualmente el sistema de Conectar y Funcionar (Plug and Play) es muy
-	común, por lo que hay que evaluar la memoria de acceso aleatorio (Random
-	Access Memory, RAM), configurar los adaptadores de Conectar y Funcionar, el 
-	sonido y el vídeo. 
-	\\ 
-	Si el BIOS no es de Conectar y Funcionar, el arranque del sistema pasa a la
-	siguiente fase. 
-	\\ 
-	El BIOS busca un disco de arranque con las instrucciones para cargar el
-	sistema operativo.  Típicamente el BIOS busca primero en la unidad A: y
-	luego en la unidad C: hasta que halla el disco de arranque y lee el primer
-	sector o bloque de información. Este es el sector de arranque que contiene
-	las instrucciones para cargar el sistema operativo.
-
-	%\subsection{Solución de problemas}{\label{sec:bios/solucion-de-problemas}}
-		%\subsubsection{Pitidos de la BIOS (Award)}{\label{sec:bios/tonos-de-la-bios}}
-
-		%En esta seccion cubriremos los significados de los pitidos de los BIOS {\em Award}. \\
-		%En la mayoría de los pitidos se les acompaña un mensaje de error. 
-
-			%\paragraph{Tono ininterrumpido}:
+	\end{quotation}
 			
-			%Fallo en el suministro elctrico. Revisamos las conexiones y la fuente
-			%de alimentación.  Tonos cortos constantes: Sobrecarga elctrica, chips
-			%defectuosos, placa mal.
-
-			%\paragraph{1 largo}:
-
-			%Si aparece esto en la pantalla “RAM Refresh Failure”, significa que los
-			%diferentes componentes encargados del refresco de la memoria RAM fallan
-			%o no están presentes. Cambiar de banco la memoria y comprobar los
-			%jumpers de buses. 
-
-			%\paragraph{1 largo y 1 corto}: 
-
-			%El código de la BIOS esta corrupto o defectuoso, probaremos a flasear o
-			%reemplazamos el chip de la BIOS sino podemos cambiamos de placa. 
-
-			%\paragraph{1 largo y dos cortos}:
-			
-			%No da señal de imagen, se trata de que nuestra tarjeta de vídeo esta
-			%estropeada, probaremos a pincharla en otro slot o probaremos otra
-			%tarjeta gráfica. 
-
-			%\paragraph{1 largo y 2 cortos}:
-
-			%Si aparece por pantalla este mensaje: “No video card found”, este error
-			%solo es aplicable a placas base con tarjetas de vídeo integradas. Fallo
-			%en la tarjeta gráfica, probaremos a deshabilitarla y pincharemos una
-			%nueva en cualquier slot libre o cambiaremos la placa madre. 
-
-			%\paragraph{1 largo y 3 cortos}:
-
-			%Si aparece este mensaje por pantalla “No monitor connected” Idem que el
-			%anterior. 
-
-			%\paragraph{1 largo y varios cortos}: 
-
-			%Mensaje de error. “Video related failure”. Lo mismo que antes. Cada
-			%fabricante implanta un código de error según el tipo de tarjeta de
-			%video y los parámetros de cada BIOS.
-
-			%\paragraph{2 largos y 1 corto}:
-			
-			%Fallo en la sincronización de las imágenes. Cargaremos por defecto los
-			%valores de la BIOS e intentaremos reiniciar. Si persiste nuestra
-			%tarjeta gráfica o placa madre están estropeadas. 
-
-			%\paragraph{2 cortos}:
-			
-			%Vemos en la pantalla este error: “Parity Error”. Se trata de un error
-			%en la configuración de la BIOS al no soportar la paridad de memoria, la
-			%deshabilitamos en al BIOS. 
-
-			%\paragraph{3 cortos}:
-			
-			%Vemos en la pantalla este error. Base 64 Kb “Memory Failure”, significa
-			%que la BIOS al intentar leer los primeros 64Kbytes de memoria RAM
-			%dieron error. Cambiamos la RAM instalada por otra. 
-
-			%\paragraph{4 cortos}:
-			
-			%Mensaje de error; “Timer not operational”. El reloj de la propia placa
-			%base esta estropeado, no hay más solución que cambiar la placa. No
-			%confundir con “CMOS cheksum error” una cosa es la pila y otra el
-			%contador o reloj de la placa base. 
-
-			%\paragraph{5 cortos}:
-			
-			%Mensaje por pantalla ``Processor Error'' significa que la CPU ha generado
-			%un error porque el procesador o la memoria de vídeo están bloqueados. 
-
-			%\paragraph{6 cortos}:
-
-			%Mensaje de error: ``8042 - Gate A20 Failure'', muy mítico este error.
-			%El controlador o procesador del teclado (8042) puede estar en mal
-			%estado. 
-			%La BIOS no puede conmutar en modo protegido. Este error se
-			%suele dar cuando se conecta/desconecta el teclado con el ordenador
-			%encendido. 
-
-			%\paragraph{7 cortos}:
-			
-			%Mensaje de error: “Processor Exception / Interrupt Error” Descripción. La CPU ha generado una interrupción excepcional o el modo virtual del procesador está activo. Procesador a punto de morirse. 
-
-			%\paragraph{8 cortos}:
-			
-			%Mensaje de error: ``Display Memory Read / Write error''. La tarjeta de video esta estropeada, procedemos a cambiarla. 
-
-			%\paragraph{9 cortos}:
-			
-			%Mensaje de error: ``ROM Checksum Error''; el valor del checksum (conteo de la memoria) de la RA
-
-		%\newpage
-
-		%\subsubsection{Errores en pantalla}\label{sub:errores en pantalla}
+	\subsection{Marcas de BIOS}\label{sub:marcas de bios}
+		Para mencionar algunas:
+		\begin{enumerate}
+			\item Award
+			\item Phoenix
+			\item American Megatrends Inc. (AMI)
+		\end{enumerate}
+	
+	\subsection{Modelos de BIOS}\label{sub:modelos de bios}
+		\begin{figure}[H]
+			\centering
+				\includegraphics[scale=0.2]{img/BIOS.JPG}
+			\caption{El BIOS extraíble}
+		\end{figure}
+	
+	\subsection{Tipos de BIOS}\label{sub:chips bios}
 		
-		%Los siguientes errores de pantalla son errores generales o bien, no dependen de marca y modelo de la BIOS:
+		\begin{description}
+			\item[ROM] Sólo se puede grabar en el momento que se fabrica el
+				chip. La información que contiene no se puede alterar.
+			\item[EEPROM] Estos chips se pueden grabar con luz ultravioleta. En
+				la parte superior del chip se puede apreciar una especie de
+				ventanilla transparente, que suele estar tapada con una
+				pegatina. Estas BIOS se encuentra principalmente en 286 y 386.
+				\cite{EEPROM}
+			\item[Flash BIOS] Son los más utilizados en la actualidad. Estos
+				chips se pueden grabar mediante impulsos eléctricos por lo que
+				el propietario del ordenador la puede actualizar con un
+				programa.
+		\end{description}
 
-			%\paragraph{BIOS ROM checksum error – system halted}
+		%\subsection{Solución de problemas}{\label{sec:bios/solucion-de-problemas}}
+			%\subsubsection{Pitidos de la BIOS (Award)}{\label{sec:bios/tonos-de-la-bios}}
 
-			%El código de control de la BIOS es incorrecto, lo que indica que puede
-			%estar corrupta. En caso de reiniciar y repetir el mensaje, tendremos
-			%que reemplazar al BIOS.
+			%En esta seccion cubriremos los significados de los pitidos de los BIOS {\em Award}. \\
+			%En la mayoría de los pitidos se les acompaña un mensaje de error. 
 
-			%\paragraph{CMOS battery failed}
+				%\paragraph{Tono ininterrumpido}:
+				
+				%Fallo en el suministro elctrico. Revisamos las conexiones y la fuente
+				%de alimentación.  Tonos cortos constantes: Sobrecarga elctrica, chips
+				%defectuosos, placa mal.
 
-			%La pila de la placa base que alimenta la memoria CMOS ha dejado de
-			%suministrar corriente. Es necesario cambiar la pila inmediatamente.
+				%\paragraph{1 largo}:
 
-			%\paragraph{CMOS checksum error – Defaults loaded}
+				%Si aparece esto en la pantalla “RAM Refresh Failure”, significa que los
+				%diferentes componentes encargados del refresco de la memoria RAM fallan
+				%o no están presentes. Cambiar de banco la memoria y comprobar los
+				%jumpers de buses. 
 
-			%El código de control de la CMOS no es correcto, por lo que se
-			%procede a cargar los parámetros de la BIOS por defecto. Este error
-			%se produce porque la información almacenada en la CMOS es
-			%incorrecta, lo que puede indicar que la pila está empezando a
-			%fallar.
+				%\paragraph{1 largo y 1 corto}: 
 
-			%\paragraph{Display switch is set incorrectly}
+				%El código de la BIOS esta corrupto o defectuoso, probaremos a flasear o
+				%reemplazamos el chip de la BIOS sino podemos cambiamos de placa. 
 
-			%El tipo de pantalla especificada en la BIOS es incorrecta. Esto puede ocurrir si hemos seleccionado la existencia de un adaptador monocromo cuando tenemos uno en color, o al contrario. Bastará con poner bien este parámetro para solucionar el problema.
+				%\paragraph{1 largo y dos cortos}:
+				
+				%No da señal de imagen, se trata de que nuestra tarjeta de vídeo esta
+				%estropeada, probaremos a pincharla en otro slot o probaremos otra
+				%tarjeta gráfica. 
 
-			%\paragraph{Floppy disk(s) Fail} 
-			
-			%(code 40/38/48 dependiendo de la antigüedad de la bios)
+				%\paragraph{1 largo y 2 cortos}:
 
-			%Disquetera mal conectada, verificamos todos los cables de conexión.
+				%Si aparece por pantalla este mensaje: “No video card found”, este error
+				%solo es aplicable a placas base con tarjetas de vídeo integradas. Fallo
+				%en la tarjeta gráfica, probaremos a deshabilitarla y pincharemos una
+				%nueva en cualquier slot libre o cambiaremos la placa madre. 
 
-			%\paragraph{Hard disk install failure}
+				%\paragraph{1 largo y 3 cortos}:
 
-			%La BIOS no es capaz de inicializar o encontrar el disco duro de
-			%manera correcta. Debemos estar seguros de que todos de que todos
-			%los discos se encuentren bien conectados y correctamente
-			%configurados.
+				%Si aparece este mensaje por pantalla “No monitor connected” Idem que el
+				%anterior. 
 
-			%\paragraph{Keyboard error or no keyboard present}
+				%\paragraph{1 largo y varios cortos}: 
 
-			%No es posible inicializar el teclado. Puede ser debido a que no se
-			%encuentre conectado, este estropeado e incluso porque mantenemos
-			%pulsada alguna tecla durante el proceso de arranque.
+				%Mensaje de error. “Video related failure”. Lo mismo que antes. Cada
+				%fabricante implanta un código de error según el tipo de tarjeta de
+				%video y los parámetros de cada BIOS.
 
-			%\paragraph{Keyboard error is locked out – Unlock the key}
+				%\paragraph{2 largos y 1 corto}:
+				
+				%Fallo en la sincronización de las imágenes. Cargaremos por defecto los
+				%valores de la BIOS e intentaremos reiniciar. Si persiste nuestra
+				%tarjeta gráfica o placa madre están estropeadas. 
 
-			%Este mensaje solo aparece en muy pocas BIOS, cuando alguna tecla ha
-			%quedado presionada. 
+				%\paragraph{2 cortos}:
+				
+				%Vemos en la pantalla este error: “Parity Error”. Se trata de un error
+				%en la configuración de la BIOS al no soportar la paridad de memoria, la
+				%deshabilitamos en al BIOS. 
 
-			%\paragraph{Memory Test Fail}
+				%\paragraph{3 cortos}:
+				
+				%Vemos en la pantalla este error. Base 64 Kb “Memory Failure”, significa
+				%que la BIOS al intentar leer los primeros 64Kbytes de memoria RAM
+				%dieron error. Cambiamos la RAM instalada por otra. 
 
-			%El chequeo de memoria RAM ha fallado debido probablemente, a
-			%errores en los módulos de memoria. En caso de que nos aparezca este
-			%mensaje, hemos de tener mucha precaución con el equipo, se puede
-			%volver inestable y tener prdidas de datos. Solución, comprobar que
-			%banco de memoria está mal, y sustituirlo inmediatamente. 
+				%\paragraph{4 cortos}:
+				
+				%Mensaje de error; “Timer not operational”. El reloj de la propia placa
+				%base esta estropeado, no hay más solución que cambiar la placa. No
+				%confundir con “CMOS cheksum error” una cosa es la pila y otra el
+				%contador o reloj de la placa base. 
 
-			%\paragraph{Override enabled – Defaults loaded}
+				%\paragraph{5 cortos}:
+				
+				%Mensaje por pantalla ``Processor Error'' significa que la CPU ha generado
+				%un error porque el procesador o la memoria de vídeo están bloqueados. 
 
-			%Si el sistema no puede iniciarse con los valores almacenados en la
-			%CMOS, la BIOS puede optar por sustituir estos por otros genricos
-			%diseñados para que todo funcione de manera estable, aunque sin
-			%obtener las mayores prestaciones. 
+				%\paragraph{6 cortos}:
 
-			%\paragraph{Primary master hard diskfail}
+				%Mensaje de error: ``8042 - Gate A20 Failure'', muy mítico este error.
+				%El controlador o procesador del teclado (8042) puede estar en mal
+				%estado. 
+				%La BIOS no puede conmutar en modo protegido. Este error se
+				%suele dar cuando se conecta/desconecta el teclado con el ordenador
+				%encendido. 
 
-			%El proceso de arranque ha detectado un fallo al iniciar el disco
-			%colocado como maestro en el controlador IDE primario. Para
-			%solucionar comprobaremos las conexiones del disco y la
-			%configuración de la BIOS. 
+				%\paragraph{7 cortos}:
+				
+				%Mensaje de error: “Processor Exception / Interrupt Error”
+				%Descripción. La CPU ha generado una interrupción excepcional o
+				%el modo virtual del procesador está activo. Procesador a punto
+				%de morirse. 
+
+				%\paragraph{8 cortos}:
+				
+				%Mensaje de error: ``Display Memory Read / Write error''. La tarjeta de video esta estropeada, procedemos a cambiarla. 
+
+				%\paragraph{9 cortos}:
+				
+				%Mensaje de error: ``ROM Checksum Error''; el valor del checksum (conteo de la memoria) de la RA
+
+			%\newpage
+
+	\subsection{Errores en pantalla}\label{sub:errores en pantalla}
+	
+	Los siguientes errores de pantalla son errores generales o bien, no
+	dependen de marca y modelo de la BIOS:
+
+		\subsubsection{BIOS ROM checksum error – system halted}
+
+		El código de control de la BIOS es incorrecto, lo que indica que puede
+		estar corrupta. En caso de reiniciar y repetir el mensaje, tendremos
+		que reemplazar al BIOS.
+
+		\subsubsection{CMOS battery failed}
+
+		La pila de la placa base que alimenta la memoria CMOS ha dejado de
+		suministrar corriente. Es necesario cambiar la pila inmediatamente.
+
+		\subsubsection{CMOS checksum error – Defaults loaded}
+
+		El código de control de la CMOS no es correcto, por lo que se
+		procede a cargar los parámetros de la BIOS por defecto. Este error
+		se produce porque la información almacenada en la CMOS es
+		incorrecta, lo que puede indicar que la pila está empezando a
+		fallar.
+
+		\subsubsection{Display switch is set incorrectly}
+
+		El tipo de pantalla especificada en la BIOS es incorrecta. Esto puede
+		ocurrir si hemos seleccionado la existencia de un adaptador monocromo
+		cuando tenemos uno en color, o al contrario. Bastará con poner bien
+		este parámetro para solucionar el problema.
+
+		\subsubsection{Floppy disk(s) Fail} 
+		
+		(code 40/38/48 dependiendo de la antigüedad de la bios)
+
+		Disquetera mal conectada, verificamos todos los cables de conexión.
+
+		\subsubsection{Hard disk install failure}
+
+		La BIOS no es capaz de inicializar o encontrar el disco duro de
+		manera correcta. Debemos estar seguros de que todos de que todos
+		los discos se encuentren bien conectados y correctamente
+		configurados.
+
+		\subsubsection{Keyboard error or no keyboard present}
+
+		No es posible inicializar el teclado. Puede ser debido a que no se
+		encuentre conectado, este estropeado e incluso porque mantenemos
+		pulsada alguna tecla durante el proceso de arranque.
+
+		\subsubsection{Keyboard error is locked out – Unlock the key}
+
+		Este mensaje solo aparece en muy pocas BIOS, cuando alguna tecla ha
+		quedado presionada. 
+
+		\subsubsection{Memory Test Fail}
+
+		El chequeo de memoria RAM ha fallado debido probablemente, a
+		errores en los módulos de memoria. En caso de que nos aparezca este
+		mensaje, hemos de tener mucha precaución con el equipo, se puede
+		volver inestable y tener prdidas de datos. Solución, comprobar que
+		banco de memoria está mal, y sustituirlo inmediatamente. 
+
+		\subsubsection{Override enabled – Defaults loaded}
+
+		Si el sistema no puede iniciarse con los valores almacenados en la
+		CMOS, la BIOS puede optar por sustituir estos por otros genricos
+		diseñados para que todo funcione de manera estable, aunque sin
+		obtener las mayores prestaciones. 
+
+		\subsubsection{Primary master hard diskfail}
+
+		El proceso de arranque ha detectado un fallo al iniciar el disco
+		colocado como maestro en el controlador IDE primario. Para
+		solucionar comprobaremos las conexiones del disco y la
+		configuración de la BIOS. 
 	
 
+	\newpage
 	\newpage
 \section{El CMOS Setup}{\label{sec:cmossetup}}
 
@@ -425,32 +465,133 @@ Cada equipo cuenta con varios BIOS:
 	Ctrl + Alt + Ins 
 	\end{verbatim}
 
-	En los BIOS Award, se muestran los siguientes mensajes durante el POST:
-	PARA INGRESAR A LA CONFIGURACIÓN ANTES DE REINICIAR PRESIONE CTRL-ALT-ESC O LA TECLA DEL
-
 	\newpage
 	\subsection{Pantallas en el CMOS Setup}{\label{sub:pantallas en el cmos setup}}
 
 		\subsubsection{Pantalla Principal}{\label{sub:pantalla principal}}
+			
 			\begin{figure}[H]
 				\centering
-					\includegraphics[scale=0.6]{presentacion/00.png}
+					\includegraphics[scale=0.6]{img/00.png}
 				\caption{La pantalla principal del CMOS Setup.}
 			\end{figure}
 
 		\subsubsection{Standard CMOS Setup}{\label{sub:Standard cmos setup}}
+	
+			``Standard CMOS Setup'' proviene del Ingles y significa literalmente:
+			Configuración estándar de CMOS
 			\begin{figure}[H]
 				\centering
-					\includegraphics[scale=0.5]{presentacion/01.png}
+					\includegraphics[scale=0.5]{img/01.png}
 				\caption{La pantalla del ``Standard CMOS Setup''.}
 			\end{figure}
+			
+			\begin{description}
+				\item[Date] Asigna al sistema una fecha. El rango del mes es 1-12, del día 1-31 y del año 1994-2079.
+				\item[Time] El formato es de 24 H, ejemplo la 1 de la tarde seria: 13: 00: 00.
+				\item[Hard disk] {\emph Disco duro} - La BIOS soporta un
+					DUAL-CHANNEL PIO y PCI BUS MASTER IDE. Cada puerto soporta
+					una unidad maestra y otra esclava.
+
+					{\large Explicación de las especificaciones de disco duro:}
+                
+					\begin{description}
+						\item[Type] La BIOS contiene una tabla de tipos
+							predefinidos. Si no coincide ninguna serie de
+							valores, escoger USER.
+						\item[Size] Capacidad aproximada del disco. Este tamaño
+							suele ser ligeramente mayor que la capacidad una
+							vez formateado el disco.
+						\item[Cyls] Número de cilindros.
+						\item[Head] Número de cabezas.
+						\item[Precomp] Cilindro de precompensación de
+							escritura. Este parámetro no tiene valor en los
+							discos modernos.
+					    \item[Landz] Zona de parada. Sólo para discos antiguos sin auto-aparcamiento.
+					    \item[Sector] Número de sectores.
+						\item[Mode] Auto, Normal, Large, o LBA.
+						\begin{itemize}
+							\item Auto: La BIOS detecta automáticamente el modo
+								óptimo.  \item Normal: El número máximo de
+								cilindros, cabezas y sectores soportado es
+								1024, 16, y 63.
+							\item Large: Discos que no soportan modo LBA y
+								tienen más de 1024 cilindros. Solo unos pocos
+								discos duros soportan este modo.
+							\item LBA (Logical Block Addressrng): Durante los
+								accesos a disco, la controladora IDE transforma
+								la dirección de datos marcada por el número de
+								sector, cabeza y cilindro en la dirección de
+								bloque física, mejorando sensiblemente la tasa
+								de transferencia de datos. Sólo para discos de
+								más de 1024 cilindros.
+						\end{itemize}
+					\item[Floppy drives A \& B] Selecciona el tamaño de tu
+						unidad de diskettes. Las opciones son: 360 KB (5.25”),
+						720 KB (3.5”), 1.2 MB (5.25”), 1.44 MB (3.5”), 2.88 MB
+						(3.5”).
+					\item[Vídeo] Selecciona el tipo de adaptador de
+						vídeo de tu PC. Estas son las posibilidades: EGA/VGA,
+						MONO, CGA A 40 y CGA A 80.
+					\item[Halt on] Durante el chequeo al encender el PC (POST),
+						la BIOS se detiene si detecta algún error de hardware.
+						Se puede indicar a la BIOS que ignore ciertos errores y
+						continúe el proceso de arranque.
+
+					\end{description}
+				\end{description}
 
 		\subsubsection{BIOS Features Setup}{\label{sub:bios features setup}}
 			\begin{figure}[H]
 				\centering
-					\includegraphics[scale=0.5]{presentacion/02.png}
+					\includegraphics[scale=0.5]{img/02.png}
 				\caption{``BIOS Features Setup''}
 			\end{figure}
+
+			Virus Warning: Para impedir que algún soft borre el sector de arranque. Recomiendo DISABLE
+      (Usar antivirus).
+CPU Internal caché/External caché: Los datos almacenados en memoria caché se transfieren
+      más rápidos, por ello ambas opciones deben estar ENABLED.
+CPU L2 Caché ECC Checking: Si este parámetro está ENABLED, el procesador dota de un
+      nivel extra de seguridad a los datos.
+Quick Power On Self Test: ENABLED, reduce el tiempo necesario para realizar el chequeo de
+        arranque (POST). Esto omite ciertos pasos. Es preferible que esté DISABLED.
+Boot Sequence: Esta opción ordena, de entre varias opciones, la secuencia de arranque. Estas son
+        las opciones disponibles: A, C, D, E, F, CD-ROM, SCSI y LS120 / ZIP.
+Swap Floppy Drive: Asigna a la unidad A la letra B y viceversa, para ello deben estar las dos
+        disqueteras ENABLED.
+Boot Up Floppy Seek: Determina, si está ENABLED, si un diskette tiene 40 u 80 pistas. Sólo los
+        diskettes de 360 KB tienen 40 pistas, por ello recomiendo DISABLED.
+Boot Up Numlock Status: Activa o Desactiva la tecla Bloq Núm.
+Boot Up System Speed: High, arranca a la velocidad por defecto del procesador, Low lo hace a
+      la velocidad del BUS AT.
+Gate A20 Option: La puerta A20 se refiere a como el sistema se comunica con la memoria por
+      encima de 1MB (memoria extendida). Cuando se selecciona FAST, el chipset del sistema
+      controla la puerta A20. Cuando se selecciona NORMAL, lo hace la controladora de
+      teclado. Seleccionando FAST, la velocidad del sistema mejora, especialmente en OS/2 y
+      Windows.
+Typematic Rate Setting: DISABLED aplicaría los valores detallados más abajo y las teclas
+      repetirían con frecuencia marcada por la controladora de teclado del sistema. Con
+      ENABLED, se puede seleccionar el retraso y la frecuencia de repetición.
+Typematic Rate (Chars/Sec): Con ENABLED se selecciona el número de veces por segundo que
+      se repite el caracter de una tecla pulsada.
+Typematic Delay (Misc): Con la opción Typematic Rate Setting ENABLED, podemos
+      seleccionar el retraso en milisegundos hasta que una tecla pulsada empieza a repetir.
+Security Option: Si se ha establecido una clave, debemos seleccionar si se pedirá cada vez que
+      arranque el sistema (SYSTEM) o cuando se accede a la configuración (SETUP).
+PCI/VGA Palette Snoop: Sólo se ha de dejar ENABLED si una tarjeta ISA instalada en el
+      sistema lo requiriera, para sincronizar la tarjeta descompresora MPEG con la tarjeta gráfica
+      o si se usa un convertidor VGA/TV.
+OS Select from DRAM>64 MB: Se selecciona si el sistema operativo es OS/2 y el equipo
+      tiene más de 64 Mbytes de memoria RAM.
+Report No FDD For Win 95: Al seleccionar YES se libera la IRQ6 cuando el equipo no tiene
+      disquetera (o no se quiere utilizar). Además, debemos deshabilitar el parámetro Onboard
+      FDC Controller que podemos encontrar en el submenú INTEGRATED PHERIPHERALS
+      de la BIOS.
+Video BIOS Shadow: Pasa la ROM de la tarjeta de vídeo a memoria RAM; por lo tanto más
+      rápida.
+C8000 – CBFF/DC – DFFFF Shadow: Más especializado y concreto que Video BIOS Shadow,
+      es preferible que esté DISABLED.
 
 			\paragraph{CPU Level 1\&2 Cache}
 			Activa o desactiva la cache de primer y segundo nivel integrada en
@@ -466,21 +607,21 @@ Cada equipo cuenta con varios BIOS:
 		\subsubsection{Chipset Features Setup}{\label{sub:chipset features setup}}
 			\begin{figure}[H]
 				\centering
-					\includegraphics[scale=0.5]{presentacion/03.png}
+					\includegraphics[scale=0.5]{img/03.png}
 				\caption{``Chipset Features Setup''.}
 			\end{figure}
 
 		\subsubsection{Power Management Setup}{\label{sub:power management setup}}
 			\begin{figure}[H]
 				\centering
-					\includegraphics[scale=0.5]{presentacion/04.png}
+					\includegraphics[scale=0.5]{img/04.png}
 				\caption{``Power Management Setup''.}
 			\end{figure}
 
 		\subsubsection{PNP/PCI Configuration}{\label{sub:pnp/pci configuration}}
 			\begin{figure}[H]
 				\centering
-					\includegraphics[scale=0.5]{presentacion/05.png}
+					\includegraphics[scale=0.5]{img/05.png}
 				\caption{``Configuracion de PNP/PCI''.}
 			\end{figure}
 
@@ -488,28 +629,31 @@ Cada equipo cuenta con varios BIOS:
 
 	\subsection{Restaurar la configuración del CMOS Setup}{\label{sec:cmossetup/resetear-el-cmos-setup}}
 
-	Hay varias formas de restaurar la configuración del CMOS Setup o bien del chip CMOS.
+		Hay varias formas de restaurar la configuración del CMOS Setup o bien del chip CMOS. \\
+		Generalmente no se lo hace, pero en caso de olvidar la contraseña de acceso
 
-	Generalmente no se lo hace, pero en caso de olvidar la contraseña de acceso al CMOS Setup un reseteo sera inevitable.
+	\subsubsection{Batería CMOS}{\label{sec:bateria cmos}}
 
-	\subsubsection{Metodo 1}{\label{sec:metodo 1}}
+		Sacar la pila del CMOS que se encuentra sujetada en un slot para la pila en
+		la placa base por unos segundos, despues reemplazarla otravez.
 
-	Sacar la pila del CMOS que se encuentra sujetada en un slot para la pila en
-	la placa base por unos segundos, despues reemplazarla otravez.
+	\subsubsection{El RESET CMOS}\label{sec:el reset cmos}
 
-	\subsubsection{Metodo 2}{\label{sec:metodo 2}}
-
+	\begin{figure}[H]
+		\centering
+			\includegraphics[scale=0.2]{img/RESET_CMOS.JPG}
+		\caption{El ``RESET CMOS''}
+	\end{figure}
 	Algunas placas base ofrecen un jumper CMOS-reset o un botón de reinicio.
 
-
-
-	\subsubsection{Metodo 3}{\label{sec:metodo 3}}
+	\subsubsection{Metodo programativo}\label{sec:metodo programativo}
 
 	En otros casos, el chip EEPROM ha de desoldar los datos en forma manual,
-	por manos de un programador. A veces es suficiente motivo para el CLK o
-	línea de DTA de la I2C bus de la EEPROM en el momento adecuado durante el
-	arranque, esto requiere una cierta precisión en las piezas de soldadura
-	SMD. Si la máquina le permite arrancar, pero no quiere que le permiten a la
+	por manos de un programador. 
+	A veces es suficiente motivo para el CLK o línea de DTA de la I2C bus de la
+	EEPROM en el momento adecuado durante el arranque, esto requiere una cierta
+	precisión en las piezas de soldadura SMD. 
+	Si la máquina le permite arrancar, pero no quiere que le permiten a la
 	configuración de la BIOS, una posible recuperación es dañar la suma de
 	comprobación CMOS, haciendo puerto directo escribe usando debug.exe,
 	corrompiendo a algunos bytes de la suma de control de área protegida de la
@@ -527,28 +671,65 @@ Cada equipo cuenta con varios BIOS:
 
 	\newpage
 
-\begin{thebibliography}{9}{\label{sec:bibliografia}}
+\appendix
 
-	\bibitem{WIC}
-		What is CMOS?,
-		\url{http://www.wisegeek.com/what-is-cmos.htm}
-
-	\bibitem{UnidadIIBIOSExposicion.ppt}
-		% CORREGIR!
-		Exposicion de BIOS de la Universidad BLABLA
-
-	\bibitem{BIOS}
-		``BIOS'' - {\em Basic Input-Output System}
-		\url{http://es.wikipedia.org/wiki/BIOS}
-
-	\bibitem{CIL}
-		Dan Clein, ``CMOS IC LAYOUT Concepts, Methodologies, and Tools'', pp. 22 - 26, 2000
-
-	\bibitem{MDB}
-		Mesmer, ``Manual de la BIOS'', Marzo 2001
+\section{Anexo}\label{sec:anexo}
+	\subsection{POST}\label{sub:post}
 	
-	\bibitem{BootProcess}
-		\url{http://duartes.org/gustavo/blog/post/how-computers-boot-up/}
+		El POST es el acrónimo inglés de Power On Self Test (Auto diagnóstico
+		al encender). Es un proceso de verificación e inicialización de los
+		componentes de entrada y salida en un sistema de cómputo que se encarga
+		de configurar y diagnosticar el estado del hardware.
 
-\end{thebibliography}
+	\subsection{CPU Cache}\label{sub:cpu cache}
+	
+		A CPU cache is a cache used by the central processing unit of a
+		computer to reduce the average time to access memory. The cache is a
+		smaller, faster memory which stores copies of the data from the most
+		frequently used main memory locations. As long as most memory accesses
+		are cached memory locations, the average latency of memory accesses
+		will be closer to the cache latency than to the latency of main memory.
+		When the processor needs to read from or write to a location in main
+		memory, it first checks whether a copy of that data is in the cache. If
+		so, the processor immediately reads from or writes to the cache, which
+		is much faster than reading from or writing to main memory.  Most
+		modern desktop and server CPUs have at least three independent caches:
+		an instruction cache to speed up executable instruction fetch, a data
+		cache to speed up data fetch and store, and a translation lookaside
+		buffer used to speed up virtual-to-physical address translation for
+		both executable instructions and data.
+
+
+
+	\subsection{IEEE 1284 (LPT)}\label{sub:ieee 1284 (lpt)}
+		
+		El estándar IEEE 1284 (Standard Signaling Method for a {\emph Bi-directional
+		Parallel Peripheral Interface for Personal Computers}, en español,
+		Estándar del Método de Señalización para una Interfaz Paralela
+		Bidireccional Periférica para Computadoras Personales), aprobado para
+		su publicación en marzo de 1994, provee de una comunicación de alta
+		velocidad y bidireccional entre un ordenador y un dispositivo externo
+		que puede comunicarse 50 ó 100 veces más rápido que con el puerto
+		paralelo original; además de ser totalmente compatible con los
+		periféricos, impresoras y software que existían previamente.
+
+		\cite{LPT}
+
+	\subsection{Plug-and-Play}\label{sub:plug-and-play}
+	
+		Plug-and-play (conocida también por su abreviatura PnP) es la
+		tecnología que permite a un dispositivo informático ser conectado a un
+		ordenador sin tener que configurar (mediante jumpers o software
+		específico (no controladores) proporcionado por el fabricante) ni
+		proporcionar parámetros a sus controladores. Para que sea posible, el
+		sistema operativo con el que funciona el ordenador debe tener soporte
+		para dicho dispositivo.
+
+		\cite{plugandplay}
+
+\newpage
+
+\clearpage
+\input{./tex/bibliografia.tex}
+
 \end{document}
