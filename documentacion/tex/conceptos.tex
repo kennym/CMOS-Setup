@@ -4,7 +4,7 @@
 
 		La memoría de acceso aleatorio (en {\bfseries inglés Random Access Memory} cuyo
 		acrónimo es {\bfseries RAM}) es la memoría donde el procesador recibe las
-		instrucciones y guarda los resultados. Es el área de trabajo paara la mayor
+		instrucciones y guarda los resultados. Es el área de trabajo para la mayor
 		parte del software de un computador.
 
 	\subsection{La ROM}{\label{sec:conceptorom}}
@@ -22,30 +22,28 @@
 		( ROM, EPROM, Flash, ...) que establece la lógica de más bajo nivel que
 		controla los circuitos electrónicos de un dispositivo de cualquier tipo.
 
-	\subsection{El CMOS}{\label{sec:conceptos/CMOS}}
+	\subsection{La CMOS}{\label{sec:conceptos/CMOS}}
 
-		{\bf CMOS} es la contracción de {\em Complementary Metal Oxide Semiconductor}, o
-		Tecnología Metal Óxido Semiconductor Complementario. \\
-		Es una tecnología utilizada para fabricar circuitos integrados (chips), que
-		para el caso es un memoria del tipo ROM, en la actualidad FLASH ROM (se
-		borran electricamente) donde se guarda información básica del equipo como el
-		BIOS y el SETUP. \\ 
-		{\bf Esta memoria tiene una porción que funciona como RAM, donde se guarda la
-		configuración que el usuario le da al equipo y algunas configuraciones
-		establecidas de fábrica.} \\ 
-		Otra información que se guarda en el y que se accede mediante el SETUP
-		es la fecha y la hora del sistema, y para que la misma se mantenga
-		actualizada debe estar siempre alimentada, es por esto que en toda
-		computadora encontraremos una pila para alimentar dicho circuito.
+		{\bf CMOS} es la abreviación que proviende el ingles de {\em
+		Complementary Metal Oxide Semiconductor}, o Tecnología Metal Óxido
+		Semiconductor Complementario. \\ 
+		Es una tecnología utilizada para fabricar circuitos integrados (chips),
+		que para el caso es un memoria del tipo ROM, en la actualidad FLASH ROM
+		(se borran electricamente) donde se guarda información básica del
+		equipo como la BIOS y el SETUP.
+		\\ Esta memoria tiene una porción que funciona como RAM, donde se
+		guarda la configuración que el usuario le da al equipo y algunas
+		configuraciones establecidas de fábrica.{\bf La RAM-CMOS} \\ 
 
 		\subsubsection{El RAM-CMOS}\label{sub:el ram-cmos}
 
 			RAM-CMOS es un tipo de memoria en que se guardan los datos que se
-			pueden configurar del BIOS y contiene información básica sobre algunos
+			pueden configurar de la BIOS y contiene información básica sobre algunos
 			recursos del sistema que son susceptibles de ser modificados como el
 			disco duro, el tipo de disco flexible, etc. \\
-			Esta información es almacenada en una RAM, de 64 bytes de capacidad,
-			con tecnología CMOS, que le proporciona el bajo consumo necesario para
+			Esta información es almacenada en una RAM, de 64 Bytes o en las
+			computadores de la nueva generación de 512 bytes de capacidad, con
+			tecnología CMOS, que le proporciona el bajo consumo necesario para
 			ser alimentada por una pila que se encuentra en la placa base y que
 			debe durar años, al ser necesario que este alimentada constantemente,
 			incluso cuando el ordenador se encuentra apagado. Para ello
@@ -54,32 +52,36 @@
 			Mas modernamente se ha sustituido por una pila desechable de litio
 			(generalmente modelo CR-2032) y que dura de 2 a 5 años.
 
-	\subsection{El BIOS}{\label{sec:conceptobios}}
+	\subsection{La BIOS}\label{sec:conceptobios}
 
 		BIOS es la contracción de Basic Input Output System, o Sistema Básico de
 		Entrada – Salida. \\
 		Es un programa muy básico, normalmente programado en lenguaje ensamblador,
 		cuya misión es la de arrancar o posibilitar el ``Booteo'' de la computadora.
 		A pesar de tratarse de un programa sumamente básico resulta totalmente
-		indispensable, ya que sin el BIOS sería imposible que una computadora pudiera
+		indispensable, ya que sin la BIOS sería imposible que una computadora pudiera
 		iniciar.
+
+	\subsection{POST}\label{sec:post}
+
+		(Power-On Self Test, Test Automático de Encendido), un pequeño test que
+		comprueba que todo esté conectado correctamente y que no haya ningún
+		problema en los dispositivos. Si todo está correcto, dará paso a cargar
+		el sistema operativo, en caso contrario, reportará un mensaje de
+		error o nos informará de algún fallo mediante una serie de pitidos o
+		por voz si nuestra placa base incorpora esta funcionalidad.
 
 	\subsection{CMOS Setup}\label{sub:cmos setup}
 	
-		Basicamente el CMOS Setup es el programa que puede modificar todos los parametros
-		guardada en la CMOS de forma visual y tangible (con el teclado). \\
-		El CMOS Setup es una serie de instrucciones generalmente escrito en
-		lenguaje Ensemblador que se lee de la BIOS al arrancar la computadora. \\
-		Se suelen usar los terminos CMOS Setup y BIOS Setup como sinonimos para
-		indicar lo mismo, pero son dos diferentes circuitos en la placa base. \\
-
-	\subsection{LBA}\label{sec:lba}
-
-		LBA (siglas de logical block addressing, dirección lógica de bloques)
-		es un método muy común usado para especificar la localización de los
-		bloques de datos en los sistemas de almacenamiento, principalmente
-		secundario, del ordenador. El término LBA puede referirse también a la
-		dirección del bloque al que enlaza.  Los bloques lógicos en los
-		ordenadores modernos son normalmente de 512 o 1024 bytes cada uno.
+		Se llama así al programa que nos permite acceder a los datos de la CMOS
+		y que por eso también se suele denominar CMOS Setup. Este programa
+		suele activarse al pulsar cierta/s tecla/s durante el arranque del
+		ordenador. Usamos este programa para consultar y/o modificar la
+		información de la CMOS (cuántos discos duros y de qué características;
+		la fecha y hora, etc). \\
+		Lógicamente, este programa SETUP está ``archivado'' (guardado) en
+		alguna parte dentro del ordenador y debe funcionar incluso cuando no
+		hay disco duro o cuando todavía no se ha reconocido el disco duro: el
+		Setup está guardado dentro de la ROM-BIOS.  
 
 	\newpage

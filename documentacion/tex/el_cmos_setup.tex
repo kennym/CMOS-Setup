@@ -3,7 +3,7 @@
 	El CMOS Setup es un conjunto de instrucciones en la BIOS que permite
 	manipular la información en los chips CMOS.
 
-	{\bf Recordar:} El BIOS es de solo lectura; el CMOS chip es de escritura/lectura.
+	{\bf Recordar:} La BIOS es de solo lectura; el CMOS chip es de escritura/lectura.
 
 	El CMOS requiere de energía eléctrica constante para no perder la
 	información guardada en los chips CMOS y por eso los fabricantes de las
@@ -20,11 +20,11 @@
 	Ctrl + Alt + Esc 
 	Ctrl + Alt + Ins 
 	\end{verbatim}
-
 	\newpage
-	\subsection{Pantallas en el CMOS Setup}{\label{sub:pantallas en el cmos setup}}
 
-		\subsubsection{Pantalla Principal}{\label{sub:pantalla principal}}
+	\subsection{Pantallas en el CMOS Setup}\label{sub:pantallas en el cmos setup}
+
+		\subsubsection{Pantalla Principal}\label{sub:pantalla principal}
 			
 			\begin{figure}[H]
 				\centering
@@ -32,10 +32,43 @@
 				\caption{La pantalla principal del CMOS Setup.}
 			\end{figure}
 
-		\subsubsection{Standard CMOS Setup}{\label{sub:Standard cmos setup}}
-	
-			``Standard CMOS Setup'' proviene del Ingles y significa literalmente:
-			Configuración estándar de CMOS
+			\paragraph{LOAD BIOS DEFAULTS}\label{LOAD BIOS DEFAULTS}
+				
+			   Esta opción carga los valores estándar por defecto de la BIOS.
+			   Para acceder a esta opción, la seleccionamos y pulsamos <ENTER>,
+			   para confirmar que queremos cargar los viejos valores pulsamos
+			   la tecla <Y>, de no ser así sólo tenemos que pulsar la tecla
+			   <N>.
+
+			\paragraph{LOAD SETUP DEFAULTS}\label{LOAD SETUP DEFAULTS} Esta
+			opción carga la configuración de los valores por defecto de la
+			BIOS. La síntesis es la misma que la del parámetro anterior.
+
+			\paragraph{SUPERVISOR/USER PASSWORD}\label{SUPERVISOR/USER
+			PASSWORD} Con esta opción podemos asignar, modificar o borrar una
+			clave de acceso. Para ello pulsamos <ENTER>, sobre dicha opción.
+			Aparecerá el mensaje: (“Enter Password: ”), tras el cuál
+			introduciremos una clave que no exceda de 8 dígitos, después
+			deberemos confirmar dicha clave.  Para borrarla primero
+			introducimos la clave anterior y después asignamos una nueva clave.
+			Si queremos solicitar la clave cuando arranque el sistema o se
+			acceda al SETUP, debemos de especificarlo en el parámetro Security
+			Option, que se encuentra dentro del submenú BIOS FEATURE SETUP.
+			\paragraph{IDE HDD AUTO DETECTION}\label{IHAD} Esta opción permite
+			detectar discos duros IDE. Los parámetros que aparecen los podemos
+			encontrar y/o modificar dentro del submenú STANDARD CMOS SETUP.
+			
+			\paragraph{EXIT CMOS SETUP UTILITY}\label{ECSU} Existen dos
+			opciones para salir del SETUP: ``SAVE \& EXIT SETUP'', donde
+			guardamos los cambios realizados y salimos, (también podemos
+			acceder directamente a este parámetro pulsando <F10>) y “EXIT
+			WITHOUT SAVING”, (<ESC> accede directamente) donde salimos sin
+			guardar los cambios.
+
+			\newpage
+		\subsubsection{Standard CMOS Setup}\label{sub:Standard cmos setup}
+			{\em Standard CMOS Setup} proviene del Ingles y significa literalmente:
+			Configuración Estándar de CMOS.
 			\begin{figure}[H]
 				\centering
 					\includegraphics[scale=0.5]{img/01.png}
@@ -45,7 +78,7 @@
 			\begin{description}
 				\item[Date] Asigna al sistema una fecha. El rango del mes es 1-12, del día 1-31 y del año 1994-2079.
 				\item[Time] El formato es de 24 H, ejemplo la 1 de la tarde seria: 13: 00: 00.
-				\item[Hard disk] {\emph Disco duro} - La BIOS soporta un
+				\item[Hard disk] Disco duro - La BIOS soporta un
 					DUAL-CHANNEL PIO y PCI BUS MASTER IDE. Cada puerto soporta
 					una unidad maestra y otra esclava.
 
@@ -363,7 +396,7 @@
 					temporizador para el modo Standby.
 			\end{description}
 			\newpage
-		\subsubsection{PNP/PCI Configuration}{\label{sub:pnp/pci configuration}}
+		\subsubsection{PNP/PCI Configuration}\label{sub:pnp/pci configuration}
 			\begin{figure}[H]
 				\centering
 					\includegraphics[scale=0.5]{img/05.png}
@@ -443,6 +476,3 @@
 	Que permitirá escribir en CMOS (Offset 10h) con el valor 0AAhA.
 
 	\newpage
-
-\appendix
-

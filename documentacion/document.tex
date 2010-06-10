@@ -1,4 +1,3 @@
-%!TEX encoding = UTF-8 Unicode%
 % Este es el trabajo de Gabinete expedido el Mayo de 2010.
 % Tema: CMOS Setup
 % Integrantes:
@@ -31,8 +30,8 @@
 
 \input{./tex/introduccion.tex}
 \input{./tex/conceptos.tex}
+\input{./tex/la_bios.tex}
 \input{./tex/el_proceso_de_inicio.tex}
-\input{./tex/el_bios.tex}
 \input{./tex/el_cmos_setup.tex}
 \section{Anexo}\label{sec:anexo}
 	\subsection{POST}\label{sub:post}
@@ -43,25 +42,18 @@
 		de configurar y diagnosticar el estado del hardware.
 
 	\subsection{CPU Cache}\label{sub:cpu cache}
-	
-		A CPU cache is a cache used by the central processing unit of a
-		computer to reduce the average time to access memory. The cache is a
-		smaller, faster memory which stores copies of the data from the most
-		frequently used main memory locations. As long as most memory accesses
-		are cached memory locations, the average latency of memory accesses
-		will be closer to the cache latency than to the latency of main memory.
-		When the processor needs to read from or write to a location in main
-		memory, it first checks whether a copy of that data is in the cache. If
-		so, the processor immediately reads from or writes to the cache, which
-		is much faster than reading from or writing to main memory.  Most
-		modern desktop and server CPUs have at least three independent caches:
-		an instruction cache to speed up executable instruction fetch, a data
-		cache to speed up data fetch and store, and a translation lookaside
-		buffer used to speed up virtual-to-physical address translation for
-		both executable instructions and data.
-
-
-
+		
+		%A CPU cache is a cache used by the central processing unit of a
+		%computer to reduce the average time to access memory. The cache is a
+		%smaller, faster memory which stores copies of the data from the most
+		%frequently used main memory locations. As long as most memory accesses
+		%are cached memory locations, the average latency of memory accesses
+		%will be closer to the cache latency than to the latency of main memory.
+		La CPU cache es un cache usado por la unidad central de procesamiento
+		de la computadora para reducir el tiempo medio de acceso a la memoría.
+		Es un chip tipo memoría más veloz y pequeño que guarda copias de la
+		información de las direcciones de memoría mas usadas.
+		
 	\subsection{IEEE 1284 (LPT)}\label{sub:ieee 1284 (lpt)}
 		
 		El estándar IEEE 1284 (Standard Signaling Method for a {\emph Bi-directional
@@ -89,6 +81,8 @@
 		\cite{plugandplay}
 
 \newpage
+
+\listoffigures
 
 \clearpage
 \input{./tex/bibliografia.tex}

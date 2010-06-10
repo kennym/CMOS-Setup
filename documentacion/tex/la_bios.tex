@@ -1,0 +1,136 @@
+\section{La BIOS}\label{sec:bios}
+
+	BIOS significa Basic Input/Output System, o lo que es lo mismo, Sistema
+	Básico de Entrada y Sálida. La BIOS es un programa informático (es decir,
+	Software). \\
+	Este programa es el que se encarga de comprobar el hardware
+	instalado en el sistema, manipular periféricos y dispositivos a bajo nivel
+	y cargar el sistema de arranque que permite iniciar el sistema operativo. \\
+	{\bf En resumen, es lo que permite que el ordenador arranque correctamente en
+	primera instancia.}
+
+	%\subsection{Funciones}\label{sub:funciones}
+		%%A power-on self-test (POST) for all of the different hardware
+		%%components in the system to make sure everything is working properly 
+		
+		%%Activating other BIOS chips on different cards installed in the
+		%%computer - For example, SCSI and graphics cards often have their own
+		%%BIOS chips.  
+		
+		%%Providing a set of low-level routines that the operating system uses to
+		%%interface to different hardware devices - It is these routines that
+		%%give the BIOS its name. They manage things like the keyboard, the
+		%%screen, and the serial and parallel ports, especially when the computer
+		%%is booting.  
+		
+		%%Managing a collection of settings for the hard disks, clock, etc.	
+
+		%\begin{enumerate}
+			%\item Realizar el POST
+			%\item Detectar e instalar otros dispositivos, como disco duro,
+				%accelerador grafico
+			%\item 
+		%\end{enumerate}
+			
+	\subsection{Marcas de BIOS}\label{sub:marcas de bios}
+		Para mencionar algunas:
+		\begin{enumerate}
+			\item Award
+			\item Phoenix
+			\item American Megatrends Inc. (AMI)
+		\end{enumerate}
+	
+	\subsection{Tipos de BIOS}\label{sub:chips bios}
+		
+		\begin{description}
+			\item[ROM] Sólo se puede grabar en el momento que se fabrica el
+				chip. La información que contiene no se puede alterar.
+			\item[EEPROM] Estos chips se pueden grabar con luz ultravioleta. En
+				la parte superior del chip se puede apreciar una especie de
+				ventanilla transparente, que suele estar tapada con una
+				pegatina. Estas BIOS se encuentra principalmente en 286 y 386.
+				\cite{EEPROM}
+			\item[Flash BIOS] Son los más utilizados en la actualidad. Estos
+				chips se pueden grabar mediante impulsos eléctricos por lo que
+				el propietario del ordenador la puede actualizar con un
+				programa.
+		\end{description}
+
+	\subsection{Errores en pantalla}\label{sub:errores en pantalla}
+	
+	Los siguientes errores de pantalla son errores generales o bien, no
+	dependen de marca y modelo de la BIOS:
+
+		\subsubsection{BIOS ROM checksum error – system halted}
+
+		El código de control de la BIOS es incorrecto, lo que indica que puede
+		estar corrupta. En caso de reiniciar y repetir el mensaje, tendremos
+		que reemplazar al BIOS.
+
+		\subsubsection{CMOS battery failed}
+
+		La pila de la placa base que alimenta la memoria CMOS ha dejado de
+		suministrar corriente. Es necesario cambiar la pila inmediatamente.
+
+		\subsubsection{CMOS checksum error – Defaults loaded}
+
+		El código de control de la CMOS no es correcto, por lo que se
+		procede a cargar los parámetros de la BIOS por defecto. Este error
+		se produce porque la información almacenada en la CMOS es
+		incorrecta, lo que puede indicar que la pila está empezando a
+		fallar.
+
+		\subsubsection{Display switch is set incorrectly}
+
+		El tipo de pantalla especificada en la BIOS es incorrecta. Esto puede
+		ocurrir si hemos seleccionado la existencia de un adaptador monocromo
+		cuando tenemos uno en color, o al contrario. Bastará con poner bien
+		este parámetro para solucionar el problema.
+
+		\subsubsection{Floppy disk(s) Fail} 
+		
+		(code 40/38/48 dependiendo de la antigüedad de la bios)
+
+		Disquetera mal conectada, verificamos todos los cables de conexión.
+
+		\subsubsection{Hard disk install failure}
+
+		La BIOS no es capaz de inicializar o encontrar el disco duro de
+		manera correcta. Debemos estar seguros de que todos de que todos
+		los discos se encuentren bien conectados y correctamente
+		configurados.
+
+		\subsubsection{Keyboard error or no keyboard present}
+
+		No es posible inicializar el teclado. Puede ser debido a que no se
+		encuentre conectado, este estropeado e incluso porque mantenemos
+		pulsada alguna tecla durante el proceso de arranque.
+
+		\subsubsection{Keyboard error is locked out – Unlock the key}
+
+		Este mensaje solo aparece en muy pocas BIOS, cuando alguna tecla ha
+		quedado presionada. 
+
+		\subsubsection{Memory Test Fail}
+
+		El chequeo de memoria RAM ha fallado debido probablemente, a
+		errores en los módulos de memoria. En caso de que nos aparezca este
+		mensaje, hemos de tener mucha precaución con el equipo, se puede
+		volver inestable y tener prdidas de datos. Solución, comprobar que
+		banco de memoria está mal, y sustituirlo inmediatamente. 
+
+		\subsubsection{Override enabled – Defaults loaded}
+
+		Si el sistema no puede iniciarse con los valores almacenados en la
+		CMOS, la BIOS puede optar por sustituir estos por otros genricos
+		diseñados para que todo funcione de manera estable, aunque sin
+		obtener las mayores prestaciones. 
+
+		\subsubsection{Primary master hard diskfail}
+
+		El proceso de arranque ha detectado un fallo al iniciar el disco
+		colocado como maestro en el controlador IDE primario. Para
+		solucionar comprobaremos las conexiones del disco y la
+		configuración de la BIOS. 
+
+	\newpage

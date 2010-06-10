@@ -1,6 +1,14 @@
 \ProvidesPackage{style}
+%% EN: Set language to Spanish
+%% ES: Definir idioma como Castellano
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+
 %% Use the Arial font:
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
 \usepackage[scaled]{times}
 \renewcommand*\familydefault{\sfdefault}
 
@@ -8,11 +16,9 @@
 %\usepackage{ulem}
 
 %% Provide graphics support:
-
-%% EN: Set language to Spanish
-%% ES: Definir idioma como Castellano
-\usepackage[spanish]{babel}
-\selectlanguage{spanish}
+\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
 
 %% Include hyperref package:
@@ -27,22 +33,20 @@
     pdfauthor={Kenny Meyer},% author
     pdfsubject={CMOS Setup},% subject of the document
     pdfnewwindow=true,      % links in new window
-    pdfkeywords={keywords}, % list of keywords
+    pdfkeywords={CMOS, BIOS, CMOS Setup}, % list of keywords
     colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=blue,          % color of internal links
+    linkcolor=black,          % color of internal links
     citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
+    filecolor=black,      % color of file links
+    urlcolor=black           % color of external links
 }
 
 \pagenumbering{arabic}
 
-\usepackage[pdftex]{graphicx}
-\usepackage{graphicx}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
 \usepackage{float}
-\usepackage[utf8]{inputenc}
 \usepackage{url} % para URLs en la bibliografía
+\usepackage{trace}
+\usepackage{style}
 
 %% EN: Set page geometry
 %% ES: Definir la geometria de la pagina
@@ -57,4 +61,5 @@
 \fancyhead[CO,CE]{\bfseries{CMOS Setup}}
 %% Define custom footer:
 \fancyfoot{}
-\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\bfseries{11/06/2010}}
+\fancyfoot[R]{\bfseries{\thepage}}

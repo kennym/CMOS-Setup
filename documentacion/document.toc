@@ -8,43 +8,45 @@
 \contentsline {subsection}{\numberline {2.4}El CMOS}{5}{subsection.2.4}
 \contentsline {subsubsection}{\numberline {2.4.1}El RAM-CMOS}{5}{subsubsection.2.4.1}
 \contentsline {subsection}{\numberline {2.5}El BIOS}{6}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}CMOS Setup}{6}{subsection.2.6}
-\contentsline {subsection}{\numberline {2.7}LBA}{6}{subsection.2.7}
-\contentsline {section}{\numberline {3}El proceso de inicio}{7}{section.3}
-\contentsline {section}{\numberline {4}El BIOS}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}Marcas de BIOS}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Modelos de BIOS}{9}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Tipos de BIOS}{9}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Errores en pantalla}{9}{subsection.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}BIOS ROM checksum error \IeC {\textendash } system halted}{9}{subsubsection.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.2}CMOS battery failed}{10}{subsubsection.4.4.2}
-\contentsline {subsubsection}{\numberline {4.4.3}CMOS checksum error \IeC {\textendash } Defaults loaded}{10}{subsubsection.4.4.3}
-\contentsline {subsubsection}{\numberline {4.4.4}Display switch is set incorrectly}{10}{subsubsection.4.4.4}
-\contentsline {subsubsection}{\numberline {4.4.5}Floppy disk(s) Fail}{10}{subsubsection.4.4.5}
-\contentsline {subsubsection}{\numberline {4.4.6}Hard disk install failure}{10}{subsubsection.4.4.6}
-\contentsline {subsubsection}{\numberline {4.4.7}Keyboard error or no keyboard present}{10}{subsubsection.4.4.7}
-\contentsline {subsubsection}{\numberline {4.4.8}Keyboard error is locked out \IeC {\textendash } Unlock the key}{10}{subsubsection.4.4.8}
-\contentsline {subsubsection}{\numberline {4.4.9}Memory Test Fail}{10}{subsubsection.4.4.9}
-\contentsline {subsubsection}{\numberline {4.4.10}Override enabled \IeC {\textendash } Defaults loaded}{11}{subsubsection.4.4.10}
-\contentsline {subsubsection}{\numberline {4.4.11}Primary master hard diskfail}{11}{subsubsection.4.4.11}
-\contentsline {section}{\numberline {5}El CMOS Setup}{12}{section.5}
-\contentsline {subsection}{\numberline {5.1}Pantallas en el CMOS Setup}{13}{subsection.5.1}
-\contentsline {subsubsection}{\numberline {5.1.1}Pantalla Principal}{13}{subsubsection.5.1.1}
-\contentsline {subsubsection}{\numberline {5.1.2}Standard CMOS Setup}{13}{subsubsection.5.1.2}
-\contentsline {subsubsection}{\numberline {5.1.3}BIOS Features Setup}{16}{subsubsection.5.1.3}
-\contentsline {paragraph}{CPU Level 1\&2 Cache}{16}{section*.2}
-\contentsline {paragraph}{Boot Sequence}{16}{section*.3}
-\contentsline {paragraph}{Boot Up NumLock Status}{16}{section*.4}
-\contentsline {subsubsection}{\numberline {5.1.4}Chipset Features Setup}{17}{subsubsection.5.1.4}
-\contentsline {subsubsection}{\numberline {5.1.5}Power Management Setup}{18}{subsubsection.5.1.5}
-\contentsline {subsubsection}{\numberline {5.1.6}PNP/PCI Configuration}{19}{subsubsection.5.1.6}
-\contentsline {subsection}{\numberline {5.2}Restaurar la configuraci\IeC {\'o}n del CMOS Setup}{20}{subsection.5.2}
-\contentsline {subsubsection}{\numberline {5.2.1}Bater\IeC {\'\i }a CMOS}{20}{subsubsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.2}El RESET CMOS}{20}{subsubsection.5.2.2}
-\contentsline {subsubsection}{\numberline {5.2.3}Metodo programativo}{20}{subsubsection.5.2.3}
-\contentsline {section}{\numberline {A}Anexo}{22}{appendix.A}
-\contentsline {subsection}{\numberline {A.1}POST}{22}{subsection.A.1}
-\contentsline {subsection}{\numberline {A.2}CPU Cache}{22}{subsection.A.2}
-\contentsline {subsection}{\numberline {A.3}IEEE 1284 (LPT)}{22}{subsection.A.3}
-\contentsline {subsection}{\numberline {A.4}Plug-and-Play}{22}{subsection.A.4}
-\contentsline {section}{\numberline {B}Bibliograf\IeC {\'\i }a}{23}{appendix.B}
+\contentsline {subsection}{\numberline {2.6}POST}{6}{subsection.2.6}
+\contentsline {subsection}{\numberline {2.7}CMOS Setup}{6}{subsection.2.7}
+\contentsline {section}{\numberline {3}El Proceso De Inicio}{7}{section.3}
+\contentsline {section}{\numberline {4}El BIOS}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Funciones}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Marcas de BIOS}{10}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Tipos de BIOS}{11}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Errores en pantalla}{12}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}BIOS ROM checksum error \IeC {\textendash } system halted}{12}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}CMOS battery failed}{12}{subsubsection.4.4.2}
+\contentsline {subsubsection}{\numberline {4.4.3}CMOS checksum error \IeC {\textendash } Defaults loaded}{12}{subsubsection.4.4.3}
+\contentsline {subsubsection}{\numberline {4.4.4}Display switch is set incorrectly}{12}{subsubsection.4.4.4}
+\contentsline {subsubsection}{\numberline {4.4.5}Floppy disk(s) Fail}{12}{subsubsection.4.4.5}
+\contentsline {subsubsection}{\numberline {4.4.6}Hard disk install failure}{12}{subsubsection.4.4.6}
+\contentsline {subsubsection}{\numberline {4.4.7}Keyboard error or no keyboard present}{12}{subsubsection.4.4.7}
+\contentsline {subsubsection}{\numberline {4.4.8}Keyboard error is locked out \IeC {\textendash } Unlock the key}{13}{subsubsection.4.4.8}
+\contentsline {subsubsection}{\numberline {4.4.9}Memory Test Fail}{13}{subsubsection.4.4.9}
+\contentsline {subsubsection}{\numberline {4.4.10}Override enabled \IeC {\textendash } Defaults loaded}{13}{subsubsection.4.4.10}
+\contentsline {subsubsection}{\numberline {4.4.11}Primary master hard diskfail}{13}{subsubsection.4.4.11}
+\contentsline {section}{\numberline {5}El CMOS Setup}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}Pantallas en el CMOS Setup}{15}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}Pantalla Principal}{15}{subsubsection.5.1.1}
+\contentsline {paragraph}{LOAD BIOS DEFAULTS}{15}{section*.2}
+\contentsline {paragraph}{LOAD SETUP DEFAULTS}{15}{section*.3}
+\contentsline {paragraph}{SUPERVISOR/USER PASSWORD}{15}{section*.4}
+\contentsline {paragraph}{IDE HDD AUTO DETECTION}{15}{section*.5}
+\contentsline {paragraph}{EXIT CMOS SETUP UTILITY}{16}{section*.6}
+\contentsline {subsubsection}{\numberline {5.1.2}Standard CMOS Setup}{17}{subsubsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.3}BIOS Features Setup}{19}{subsubsection.5.1.3}
+\contentsline {subsubsection}{\numberline {5.1.4}Chipset Features Setup}{21}{subsubsection.5.1.4}
+\contentsline {subsubsection}{\numberline {5.1.5}Power Management Setup}{24}{subsubsection.5.1.5}
+\contentsline {subsubsection}{\numberline {5.1.6}PNP/PCI Configuration}{26}{subsubsection.5.1.6}
+\contentsline {subsection}{\numberline {5.2}Restaurar la configuraci\IeC {\'o}n del CMOS Setup}{28}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Bater\IeC {\'\i }a CMOS}{28}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}El RESET CMOS}{28}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.3}Metodo programativo}{28}{subsubsection.5.2.3}
+\contentsline {section}{\numberline {6}Anexo}{30}{section.6}
+\contentsline {subsection}{\numberline {6.1}POST}{30}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}CPU Cache}{30}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}IEEE 1284 (LPT)}{30}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Plug-and-Play}{30}{subsection.6.4}
+\contentsline {section}{\numberline {7}Bibliograf\IeC {\'\i }a}{32}{section.7}
